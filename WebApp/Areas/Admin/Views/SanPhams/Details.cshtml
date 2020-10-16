@@ -1,0 +1,55 @@
+﻿@model WebApp.Areas.Admin.Models.SanPhamViewModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/ACE_Layout_Admin.cshtml";
+    int count = 1;
+}
+<link href="~/assetadmin/css/DetailsPos.css" rel="stylesheet" />
+<div class="container-fluid" id="container-wrapper">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-3">
+                <div class="p-4 text-center text-white text-lg rounded-top" style="background-color:red"><span class="text-uppercase">Chi tiết sản phẩm </span></div>
+                <div class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
+                    <div class="w-100 text-center py-1 px-2"><span class="text-medium">Tên sản phẩm:</span> @Model.Ten</div>
+                    <div class="w-100 text-center py-1 px-2"><span class="text-medium">Ngày tạo:</span> @Model.NgayTao</div>
+                    <div class="w-100 text-center py-1 px-2"><span class="text-medium">Đơn giá:</span> <b class="money1">@Model.DonGia</b> </div>
+                    <div class="w-100 text-center py-1 px-2"><span class="text-medium">Nội dung:</span>@Model.NoiDung</div>
+                </div>
+                <div class="container" style="padding-top:10px">
+                    <div class="row">
+                        <div class="col">
+                            <label>Ảnh mô tả :</label>
+                            <img src="~/imageproducts/@Model.AnhMoTa" style="border-radius:1px;width:70%; height:90%">
+                        </div>
+                        <div class="col">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Size tồn</th>
+                                        <th scope="col">Số lượng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.SizeViewModel)
+                                    {
+                                        <tr>
+                                            <th scope="row">@count</th>
+                                            <td>@item.SizeNumber</td>
+                                            <td>@item.SoLuongKho</td>
+                                        </tr>
+                                        count++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+
+    </div>
+</div>

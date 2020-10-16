@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="~/assetadmin/img/logo/logo.jpg" rel="icon">
+    <title>MyCafe</title>
+    <link href="~/assetadmin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assetadmin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="~/assetadmin/css/ruang-admin.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
+    <script src="~/assetadmin/scripts/jquery-3.0.0.min.js"></script>
+    @*<script src="~/assetadmin/public/templates/js/jquery.js"></script>*@
+    <script src="~/assetadmin/public/templates/js/jquery-ui.min.js"></script>
+    @*<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>*@
+    <script src="~/assetadmin/js/simple.money.format.js"></script>
+    <script src="~/assetadmin/js/number-divider.js"></script>
+    <link href="~/assetadmin/vendor/bootstrap/css/CustomPagination.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedcolumns/3.3.0/js/dataTables.fixedColumns.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        /*swal alert*/
+        .swal-button {
+            padding: 7px 19px;
+            border-radius: 2px;
+            background-color: #4962B3;
+            font-size: 12px;
+            border: 1px solid #3e549a;
+            text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+        }
+
+        .swal-text {
+            background-color: #FEFAE3;
+            padding: 17px;
+            border: 1px solid #F0E1A1;
+            display: block;
+            margin: 22px;
+            text-align: center;
+            color: #61534e;
+        }
+        /*end*/
+    </style>
+    @*<script>function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+            function (m, key, value) {
+                vars[key] = value;
+            });
+            return vars;
+        }</script>*@
+
+</head>
+<body id="page-top">
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center"
+               href="@Url.Action("Index", "Home", new { area ="CMS_Sale" })">
+                <div class="sidebar-brand-icon">
+                    <img src="/Assets/img/logo/logo.jpg">
+                </div>
+                <div class="sidebar-brand-text mx-3">MyCafe</div>
+            </a>
+            <hr class="sidebar-divider my-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="@Url.Action("Index", "Home", new { area ="CMS_Sale" })">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Tổng quan</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" target="_blank" href="@Url.Action("Index", "POS", new { area ="CMS_Sale" })">
+                    <i class="fas fa-desktop"></i>
+                    <span>Máy POS</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
+                   aria-expanded="true" aria-controls="collapseBootstrap">
+                    <i class="fas fa-home"></i>
+                    <span>QL Cửa hàng</span>
+                </a>
+                <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+                    <div id="cc" class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">QUẢN LÝ CỬA HÀNG</h6>
+                        <a class="collapse-item" href="@Url.Action("Index", "PurchaseOrder", new { area ="CMS_Sale" })">Đơn hàng</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "Products", new { area ="CMS_Sale" })">Sản phẩm</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "InOrder", new { area ="CMS_Sale" })">Nhập hàng</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "OutOrder", new { area ="CMS_Sale" })">Xuất hàng</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "Warehouse", new { area ="CMS_Sale" })">Kho hàng</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "ProductType", new { area ="CMS_Sale" })">Loại & Đvt</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm"
+                   aria-expanded="true" aria-controls="collapseForm">
+                    <i class="fas fa-users"></i>
+                    <span>QL Đối tác</span>
+                </a>
+                <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">QUẢN LÝ ĐỐI TÁC</h6>
+                        <a class="collapse-item" href="@Url.Action("Index", "Customer", new { area ="Crm" })">Khách hàng</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "Supplier", new { area ="Crm" })">Nhà cung cấp</a>
+                        @*<a class="collapse-item" href="modals.html">Nhóm khách hàng</a>
+                        <a class="collapse-item" href="popovers.html">Đơn vị vận chuyển</a>*@
+
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
+                   aria-controls="collapseTable">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Báo cáo</span>
+                </a>
+                <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">BÁO CÁO</h6>
+                        <a class="collapse-item" href="@Url.Action("BaoCaoDoanhThuTheoNgay", "SaleReport", new { area ="CMS_Sale" })">Doanh số theo ngày</a>
+                        <a class="collapse-item" href="@Url.Action("BaoCaoDoanhThuTheoThang", "SaleReport", new { area ="CMS_Sale" })">Doanh số theo tháng</a>
+                        <a class="collapse-item" href="@Url.Action("BaoCaoTonKho", "SaleReport", new { area ="CMS_Sale" })"> Báo cáo tồn kho</a>
+                        <a class="collapse-item" href="@Url.Action("TopSanPhamBanChay", "SaleReport", new { area ="CMS_Sale" })">Sản phẩm bán chạy</a>
+                        <a class="collapse-item" href="@Url.Action("TopSanPhamKhongBanChay", "SaleReport", new { area ="CMS_Sale" })">Sản phẩm bán chậm</a>
+                        @*<a class="collapse-item" href="datatables.html">Lãi lỗ</a>*@
+                    </div>
+                </div>
+            </li>
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Cài đặt
+            </div>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true"
+                   aria-controls="collapsePage">
+                    <i class="fa fa-gear"></i>
+                    <span>Thiết lập</span>
+                </a>
+                <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Thiết lập</h6>
+                        <a class="collapse-item" href="@Url.Action("Index", "Staff", new { area ="CMS_Staff" })">Nhân viên</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "Setting", new { area ="Administration" })">Phân quyền</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "UserType", new { area ="CMS_Staff" })">Loại nhân viên</a>
+                        <a class="collapse-item" href="@Url.Action("Create", "SettingPoint", new { area ="Administration" })">Thiết lập điểm</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "Promotions", new { area ="Administration" })">Khuyến mãi</a>
+                    </div>
+                </div>
+            </li>
+            <hr class="sidebar-divider">
+        </ul>
+        <!-- Sidebar -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <!-- TopBar -->
+                <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+                    <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            
+                        </li>
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                               aria-haspopup="true" aria-expanded="false">
+                                <img class="img-profile rounded-circle" src="/Assets/img/boy.png" style="max-width: 60px">
+                                <span class="ml-2 d-none d-lg-inline text-white small">Admin</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href='@Url.Action("LogOff", "User", new {area = "Administration" })'>
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Đăng xuất
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- Topbar -->
+                <!-- Container Fluid-->
+                @RenderBody()
+                <!---Container Fluid-->
+            </div>
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>
+                            <script>document.write(new Date().getFullYear());</script> - Đã phát triển bởi
+                            <b><a href="#" target="_blank">T&V</a></b>
+                        </span>
+                    </div>
+                </div>
+            </footer>
+            <!-- Footer -->
+        </div>
+    </div>
+    <!-- Scroll to top -->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <script src="~/assetadmin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assetadmin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/assetadmin/js/ruang-admin.min.js"></script>
+    <script src="~/assetadmin/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/assetadmin/js/demo/chart-area-demo.js"></script>
+    <script src="~/assetadmin/js/demo/chart-bar-demo.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+    @*<script>function change(idthis, idthat) {
+            var el = idthis.value.replace(/[.]/g, '');
+            $("#" + idthat + "").val(el);
+        }
+        $('.money1').divide({
+            delimiter: ".",
+            divideThousand: true
+        });
+        $('.money').simpleMoneyFormat();
+        $(document).ready(function () {
+            $('li.active').removeClass('active');
+            $('a[href="' + location.pathname + '"]').closest('li').addClass('active');
+        });
+        function number_format(number, decimals, dec_point, thousands_sep) {
+            // *     example: number_format(1234.56, 2, ',', ' ');
+            // *     return: '1 234,56'
+            number = (number + '').replace(',', '').replace(' ', '');
+            var n = !isFinite(+number) ? 0 : +number,
+              prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+              sep = (typeof thousands_sep === 'undefined') ? '.' : thousands_sep,
+              dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+              s = '',
+              toFixedFix = function (n, prec) {
+                  var k = Math.pow(10, prec);
+                  return '' + Math.round(n * k) / k;
+              };
+            // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+            s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+            if (s[0].length > 3) {
+                s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+            }
+            if ((s[1] || '').length < prec) {
+                s[1] = s[1] || '';
+                s[1] += new Array(prec - s[1].length + 1).join('0');
+            }
+            return s.join(dec);
+        }</script>*@
+</body>
+</html>
+

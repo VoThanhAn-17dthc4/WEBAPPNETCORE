@@ -1,0 +1,34 @@
+﻿@model WebApp.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+@using (Html.BeginForm())
+{
+
+    <div class="login-form">
+        <div class="text-center">
+            <h1 class="h4 text-gray-900 mb-4">MyCafe Xin chào!</h1>
+        </div>
+        <form class="user">
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "Tên tài khoản " })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", placeholder = "Mật khẩu", Type = "password" })
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary btn-block" value="Đăng Nhập">
+            </div>
+        </form>
+        <hr>
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="text-center">
+            <a class="font-weight-bold small" href="#">Quản lý MyCafe!</a>
+        </div>
+        <div class="text-center">
+        </div>
+    </div>
+
+}

@@ -1,0 +1,275 @@
+﻿@model WebApp.Areas.Admin.Models.PhieuNhapViewModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/ACE_Layout_Admin.cshtml";
+}
+<style>
+    .my-custom-scrollbar {
+        position: relative;
+        height: 300px;
+        overflow: auto;
+    }
+
+    .table-wrapper-scroll-y {
+        display: block;
+    }
+
+    .ui-autocomplete-row {
+        padding: 8px;
+        background-color: #f4f4f4;
+        border-bottom: 1px solid #ccc;
+        font-weight: bold;
+    }
+
+        .ui-autocomplete-row:hover {
+            background-color: #ddd;
+        }
+
+    ul#ui-id-1 {
+        list-style: none;
+        width: 200px;
+    }
+</style>
+@using (Html.BeginForm("Create", "PhieuNhap", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="container-fluid" id="container-wrapper">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <div style="display:flex;">
+                <h1 class="h3 mb-0 text-gray-800">Tạo phiếu nhập</h1>
+
+            </div>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="./">Trang chủ</a></li>
+                <li class="breadcrumb-item">Quản lý</li>
+                <li class="breadcrumb-item active" aria-current="page">Tạo phiếu nhập</li>
+            </ol>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="col-md-12" style="display:flex">
+                    <div class="col-md-4">
+                        <select class="form-control" id="selectloai">
+                            <option selected>Tìm theo loại</option>
+                            <option value="1">1</option>
+                        </select>
+                    </div>
+                    <div class="col-md-8">
+                        <input type="text" placeholder="Tìm kiếm nguyên liệu..." id="txtName" class="form-control marg-bot-10">
+                    </div>
+                </div>
+                <div class="col-md-12" style="padding-top: 10px;padding-bottom:10px">
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <div style="overflow-x:auto;" id="listOrderDetail">
+                            <div class="table-responsive">
+                                <table id="myTable" class="table order-list table-bordered table-striped mb-0">
+                                    <thead class="thead-light" style="background-color:#e7cff7">
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Tên sản phẩm</th>
+                                            <th scope="col">Size</th>
+                                            <th scope="col">Đơn giá</th>
+                                            <th scope="col">Số lượng</th>
+                                            <th scope="col">Thành tiền</th>
+                                            <th scope="col">Hủy</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="detailList"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div>
+                    <div class="col-lg-12">
+                        <label style="width: 215px; margin-top: 10px;">Chọn nhà cung cấp:</label>
+                        <select class="form-control " data-val="true" data-val-number="The field Loại người dùng must be a number." data-val-required="Bắt buộc nhập" id="IdNhaCungCap" name="IdNhaCungCap">
+                            <option value="1">1</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label style="width: 215px; margin-top: 10px;">Nhân viên nhập:</label>
+                            <input type="text" class="form-control" value="ABC" readonly />
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label style="width: 215px; margin-top: 10px;">Tổng tiền:</label>
+                            <input id="totalafterdiscount" class="form-control money1" value="" onchange="" placeholder="0" , style="border-radius: 0 !important;" readonly />
+                            @Html.TextBoxFor(x => x.TongTien, new { @class = "form-control", @Type = "hidden" })
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div>
+                            <div style="padding:0px">
+                                <label>Ghi chú</label>
+                            </div>
+                            <div class="col-lg-12">
+                                @Html.TextAreaFor(x => x.TieuDe, new { @class = "form-control", rows = "2", style = "border-radius: 0;" })
+                            </div>
+                            <div class="btn-groups pull-right" style="float:right;padding-top:10px;display:flex">
+                                <button type="submit" class="btn btn-primary" id="Save" style="margin-right:5px;">
+                                    <i class="fa fa-save"></i> Lưu
+                                </button>
+                                <a href="/orders">
+                                    <button type="button" class="btn-back btn btn-default">
+                                        <i class="fa fa-arrow-left"></i> Hủy
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    <script>
+        var counter = 0;
+        $(document).ready(function () {
+            $('#listOrderDetail').on('change', '.detail_item_qty', function () {
+                    var $this = $(this);
+                    var id = $this.closest('tr').data('id');
+                    TotalMoney(id);
+                    calcTotalAmount();
+                });
+            $('#listOrderDetail').on('change', '.detail_item_total', function () {
+                    var $this = $(this);
+                    var id = $this.closest('tr').data('id');
+                    TotalMoney(id);
+                    calcTotalAmount();
+                });
+                AutoCompleteTB();
+            });
+            function AutoCompleteTB(idloai) {
+            $('#txtName').autocomplete({
+                minLength: 1,
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Admin/SanPhams/FindProdcuts/",
+                        dataType: "json",
+                        type: "GET",
+                        contentType: 'application/json; charset=utf-8',
+                        data: { name: request.term, Idloai: idloai },
+                        success: function (data) {
+                                response(data);
+                            },
+                        error: function (err) {
+                                alert(err);
+                            }
+                        });
+        },
+                focus: updateTextBox,
+                select: function (e, ui) {
+            debugger
+                    console.log(ui.item);
+            SelectProducts(ui.item.id, ui.item.size);
+        },
+            })
+                .autocomplete('instance')._renderItem = function (ul, item) {
+        return $('<li class="ui-autocomplete-row"></li>')
+            .append('<img src="/imageproducts/' + item.anhMoTa + '" width="40" />&nbsp;&nbsp;&nbsp;Tên SP : ' + item.ten + ' - Đơn giá : ' + item.donGia + ' - Size : ' + item.size + '')
+            .appendTo(ul);
+        function updateTextBox(event, ui) {
+                        $(this).val(ui.item.Id);
+            return false;
+        }
+    };
+    function updateTextBox(event, ui) {
+        //$('#IdKhachHang').val(ui.item.Id);
+        //$('#dlcustomer').val(ui.item.TenKH);
+        return false;
+    }
+}
+        $("table.order-list").on("click", ".ibtnDel", function (event) {
+            $(this).closest("tr").remove();
+            $('.detailList tr').each(function (index, tr) {
+                $(this).find("span.sn").html(index + 1);
+                $(tr).find('.detail_item_qty').attr('name', 'ListCTPhieuNhap[' + index + '].SoLuong');
+                $(tr).find('.detail_item_price').attr('name', 'ListCTPhieuNhap[' + index + '].DonGia');
+                $(tr).find('.detail_item_id').attr('name', 'ListCTPhieuNhap[' + index + '].IdThanhPham');
+    });
+    var count = myTable.querySelectorAll("tr").length;
+    if (count == 1) {
+                $('#Custommer').val("");
+                $('#totalafterdiscount').val("");
+                $('.Excesscash').text("0");
+    }
+    else {
+        calcTotalAmount();
+    }
+});
+function SelectProducts(id, size) {
+            $.ajax({
+    url: "/Admin/SanPhams/FindProdcutsById/",
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                data: { Id: id, Size: size },
+                success: function (data) {
+            console.log(data)
+                    var count = myTable.querySelectorAll("tr").length;
+            if (count == null) {
+                count = 0;
+            }
+            debugger
+            var idsize = size.toString() + id.toString();
+            var getid = $("#" + idsize + "").val();
+            if (getid == null) {
+                var html = "";
+                        $.each(data, function (key, item) {
+                    html += '<tr data-id="' + item.sizeid + '"><td id="' + item.sizeid + '"><span class="sn">' + count + '</span></td>';
+                    html += '<td style="display:none;"><input class="detail_item_id form-control input-sm" name="CTPhieuNhapViewModel[' + (count - 1) + '].IdSp"  value="' + id + '"></td>';
+                    html += '<td><p type="text">' + item.ten + '</p></td>';
+                    html += '<td id="' + size + '"><p class="">' + size + '</p></td>';
+                    html += '<td><p  class="detail_item_price" type="text">' + item.donGia + '</p></td>';
+                    html += '<td style="display:none;"><input id="Price_' + idsize + '" class="detail_item_price form-control input-sm" type="text" name="CTPhieuNhapViewModel[' + (count - 1) + '].DonGia" value="' + item.donGia + '"></td>';
+                    html += '<td><input id="Count_' + idsize + '" class="detail_item_qty form-control input-sm" type="number" min="1" name="CTPhieuNhapViewModel[' + (count - 1) + '].SoLuong" value="1"></td>';
+                    html += '<td style="display:none;"><input type="text" name="CTPhieuNhapViewModel[' + (count - 1) + '].IdSize" value="' + size + '"></td>';
+                    html += '<td><p id="Total_' + idsize + '" class="detail_item_total"></p></td>';
+                    html += '<td style="text-align:center;"><i class="ibtnDel fa fa-close" style="font-size:35px;color:red;"></i></td></tr>';
+                            $("table.order-list").append(html);
+                    TotalMoney(idsize);
+                    calcTotalAmount();
+                    counter++;
+
+                });
+                    }
+                    else {
+    var num1 = $("#Count_" + idsize + "").val();
+    var answer = parseInt(num1) + 1;
+                        $("#Count_" + idsize + "").val(answer);
+    TotalMoney(idsize);
+    calcTotalAmount();
+}
+
+                },
+                error: function (xhr) {
+    console.log(xhr);
+}
+            });
+        }
+        function TotalMoney(id) {
+    var num1 = $("#Count_" + id + "").val();
+    var num2 = $("table.order-list #Price_" + id + "").val();
+    var answer = parseInt(num1) * parseInt(num2);
+            $("table.order-list #Total_" + id + "").text((answer));
+            $("table.order-list #Total_" + id + "").val(answer);
+}
+function calcTotalAmount() {
+    var total = 0;
+    var total1 = 0;
+    var selector = '.detailList tr';
+            $('table > tbody  > tr').each(function (index, elem) {
+        if ($(elem).find('.detail_item_total').text() != '') {
+    console.log(total);
+    console.log(elem);
+    total = total + parseFloat($(elem).find('.detail_item_total').val());
+                    $("#totalafterdiscount").val(total);
+                    $('input[name="TongTien"]').val(total);
+
+}
+            });
+        }
+    </script>

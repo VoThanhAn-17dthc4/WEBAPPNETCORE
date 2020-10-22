@@ -6,8 +6,7 @@ using WebApp.Models;
 
 namespace WebApp.Interface
 {
-    public interface ISize:IGenericRepository<Size>
+    public interface ICTPhieuNhap : IGenericRepository<CtphieuNhap>
     {
-        Size findbysizeandid(int? id, int? size);
     }
 }

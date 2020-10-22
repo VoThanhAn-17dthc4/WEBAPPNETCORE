@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Areas.Admin.Models;
 using WebApp.Interface;
 using WebApp.Models;
 using WebApp.Repository;
-using System.IO;
-using Microsoft.Extensions.Hosting.Internal;
-using Microsoft.AspNetCore.Hosting;
-using System.Text.RegularExpressions;
-using Microsoft.AspNetCore.Authorization;
+using WebApp.Helper;
 
-namespace WebApp.Areas.Admin.Controllers
+namespace WebApp.Areas.AdminX.Controllers
 {
-    [Authorize]
+
     [Area("Admin")]
     public class SanPhamsController : Controller
     {
@@ -25,13 +24,6 @@ namespace WebApp.Areas.Admin.Controllers
         private readonly ISize Size = new SizeRepository();
         private readonly ICTSanPham CTSanpham = new CTSanPhamRepository();
         private readonly IWebHostEnvironment webHostEnvironment;
-        public SanPhamsController(WebAppBanHangContext context, IWebHostEnvironment hostEnvironment)
-        {
-            _context = context;
-            webHostEnvironment = hostEnvironment;
-        }
-
-        // GET: Admin/SanPhams
         public async Task<IActionResult> Index()
         {
             IEnumerable<SanPhamViewModel> model = Sanpham.SelectAll().Select(
@@ -44,7 +36,7 @@ namespace WebApp.Areas.Admin.Controllers
                          DonGia = item.DonGia,
                          NoiDung = item.NoiDung,
                          IsDelete = item.IsDelete
-                     }).OrderByDescending(x => x.NgayTao).Where(x=>x.IsDelete!=true);
+                     }).OrderByDescending(x => x.NgayTao).Where(x => x.IsDelete != true);
             return View(model);
         }
 
@@ -108,7 +100,7 @@ namespace WebApp.Areas.Admin.Controllers
                     Size.Save();
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
 
             }
@@ -214,6 +206,38 @@ namespace WebApp.Areas.Admin.Controllers
         private bool SanPhamExists(int id)
         {
             return _context.SanPham.Any(e => e.Id == id);
+        }
+        public JsonResult FindProdcuts(string name,int? loai)
+        {
+            var products = Sanpham.SelectAll();
+            var size = Size.SelectAll();
+            var ketqua = from product in products
+                         from sizes in size
+                         where Comon.ChuyenThanhKhongDau(product.Ten).Contains(Comon.ChuyenThanhKhongDau(name)) && product.Id == sizes.IdSp
+                         select new
+                         {
+                             ten = product.Ten,
+                             donGia = product.DonGia,
+                             anhMoTa = product.AnhMoTa,
+                             size = sizes.SizeNumber,
+                             id = product.Id
+                         };
+            return Json(ketqua);
+        }
+        public JsonResult FindProdcutsById(int? id,int? size)
+        {
+            var products = Sanpham.SelectAll();
+            var sizex = Size.SelectAll();
+            var ketqua = from product in products
+                         from sizes in sizex
+                         where product.Id == id && product.Id == sizes.IdSp && sizes.SizeNumber == size
+                         select new
+                         {
+                             ten = product.Ten,
+                             donGia = product.DonGia,
+                             sizeid = sizes.SizeNumber.ToString()+product.Id.ToString()
+                         };
+            return Json(ketqua);
         }
     }
 }

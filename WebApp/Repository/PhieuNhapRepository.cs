@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApp.Interface;
 using WebApp.Models;
 
-namespace WebApp.Interface
+namespace WebApp.Repository
 {
-    public interface ISize:IGenericRepository<Size>
+    public class PhieuNhapRepository : GenericRepository<PhieuNhap>, IPhieuNhap
     {
-        Size findbysizeandid(int? id, int? size);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,9 +15,8 @@ namespace WebApp.Areas.Admin.Models
         public DateTime? NgayTao { get; set; }
         public string NoiDung { get; set; }
         public string AnhMoTa { get; set; }
-        public IFormFile ProfileImage { get; set; }
-        public int? SoLuongKho { get; set; }
         public bool? IsDelete { get; set; }
+        public IFormFile ProfileImage { get; set; }
         public List<SizeViewModel> SizeViewModel { get; set; }
     }
 }

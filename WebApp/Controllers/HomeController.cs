@@ -51,6 +51,10 @@ namespace WebApp.Controllers
                     var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                     if (result.Succeeded)
                     {
+                        if(returnUrl == null)
+                        {
+                            return RedirectToAction("Index","SanPhams", new {Area = "Admin" });
+                        }    
                         return RedirectToAction(returnUrl);
                     }
                     if (result.IsLockedOut)

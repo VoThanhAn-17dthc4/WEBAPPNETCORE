@@ -12,13 +12,15 @@ using WebApp.Interface;
 using WebApp.Models;
 using WebApp.Repository;
 using WebApp.Helper;
+using Microsoft.AspNetCore.Identity;
 
 namespace WebApp.Areas.AdminX.Controllers
 {
-
+    [Authorize]
     [Area("Admin")]
     public class SanPhamsController : Controller
     {
+        private readonly UserManager<UserIdentity> _userManager;
         private readonly WebAppBanHangContext _context;
         private readonly ISanpham Sanpham = new SanPhamRepository();
         private readonly ISize Size = new SizeRepository();
@@ -66,6 +68,7 @@ namespace WebApp.Areas.AdminX.Controllers
         // GET: Admin/SanPhams/Create
         public IActionResult Create()
         {
+            var user = _userManager.FindByNameAsync(User.Identity.Name);
             return View();
         }
 

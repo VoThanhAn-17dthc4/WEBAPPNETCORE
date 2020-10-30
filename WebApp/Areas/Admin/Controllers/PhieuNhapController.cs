@@ -33,6 +33,28 @@ namespace WebApp.Areas.Admin.Controllers
                 }).OrderByDescending(x => x.NgayTao).Where(x => x.IsDelete != true);
             return View(model);
         }
+        public IActionResult Details(int? id)
+        {
+            var model = new PhieuNhapViewModel();
+            var item = PhieuNhap.SelectById(id);
+            model.Id = item.Id;
+            model.TieuDe = item.TieuDe;
+            model.TongTien = item.TongTien;
+            model.IdNcc = item.IdNcc;
+            model.IdTk = item.IdTk ;
+            model.IsDelete = item.IsDelete;
+            model.NgayTao = item.NgayTao;
+            var details = CTPhieuNhap.SelectAll().Select(item => new CTPhieuNhapViewModel
+            {
+                IdSp = item.IdSp,
+                IdPn = item.IdPn,
+                IdSize = item.IdSize,
+                SoLuong = item.SoLuong,
+                DonGia = item.DonGia
+            }).Where(x => x.IdPn == id).ToList();
+            model.CTPhieuNhapViewModel = details;
+            return View(model);
+        }
         public IActionResult Create()
         {
             return View();

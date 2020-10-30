@@ -193,9 +193,13 @@ iframe {
  */
 /* 01. Global Style
    ==================================== */
+@font-face {
+	font-family: JuraVariableFont;
+	src: url(~/assets/fonts/Jura/Jura-VariableFont_wght.ttf);
+}
 body {
   font-weight: 400;
-  font-family: 'BrandonBold', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 h1,
 h2,
@@ -262,22 +266,22 @@ input {
 input::-webkit-input-placeholder {
   font-size: 16px;
   color: #1e1e1e;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 input::-moz-placeholder {
   font-size: 16px;
   color: #1e1e1e;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 input:-ms-input-placeholder {
   font-size: 16px;
   color: #1e1e1e;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 input:-moz-placeholder {
   font-size: 16px;
   color: #1e1e1e;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .wrapper {
   position: relative;
@@ -363,13 +367,13 @@ input:-moz-placeholder {
   font-style: normal;
 }
 @font-face {
-  font-family: 'BrandonMedium';
+  font-family: 'JuraVariableFont';
   src: url('../../assets/fonts/brandon/brandon_med.eot') format('embedded-opentype'), url('../../assets/fonts/brandon/brandon_med.otf') format('opentype'), url('../../assets/fonts/brandon/brandon_med.ttf') format('truetype'), url('../../assets/fonts/brandon/brandon_med.woff') format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: 'BrandonMediumItalic';
+  font-family: 'JuraVariableFontItalic';
   src: url('../../assets/fonts/brandon/brandon_medium_italic.eot') format('embedded-opentype'), url('../../assets/fonts/brandon/brandon_medium_italic.otf') format('opentype'), url('../../assets/fonts/brandon/brandon_medium_italic.ttf') format('truetype'), url('../../assets/fonts/brandon/brandon_medium_italic.woff') format('woff');
   font-weight: normal;
   font-style: normal;
@@ -381,7 +385,7 @@ input:-moz-placeholder {
   font-style: normal;
 }
 @font-face {
-  font-family: 'BrandonBold';
+  font-family: 'JuraVariableFont';
   src: url('../../assets/fonts/brandon/Brandon_bld.eot') format('embedded-opentype'), url('../../assets/fonts/brandon/Brandon_bld.otf') format('opentype'), url('../../assets/fonts/brandon/Brandon_bld.ttf') format('truetype'), url('../../assets/fonts/brandon/Brandon_bld.woff') format('woff');
   font-weight: normal;
   font-style: normal;
@@ -787,7 +791,7 @@ body .cart-modal .title {
   line-height: 21px;
   text-align: left;
   margin-bottom: 5px;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 body .cart-modal ul {
   padding: 25px 20px 20px 20px;
@@ -817,7 +821,7 @@ body .cart-modal li:last-child {
 body .cart-modal .price {
   font-size: 18px;
   color: #777;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 body .cart-modal .total {
   text-align: left;
@@ -1046,12 +1050,12 @@ body .cart-modal .custom-btn:hover {
   font-size: 24px;
   color: #1e1e1e;
   margin-bottom: 14px;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .product .info-product .price {
   font-size: 20px;
   color: #878787;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .product .info-product .price del {
   color: #d1d1d1;
@@ -1093,7 +1097,7 @@ body .cart-modal .custom-btn:hover {
 .big-banner {
   padding: 172px 0 160px;
   margin-bottom: 150px;
-  background: url(http://via.placeholder.com/1640x630) no-repeat center;
+  background: url(~/assetadmin/img/banner/Untitled-1.png) no-repeat center;
   background-size: cover;
 }
 .big-banner .text {
@@ -1270,7 +1274,7 @@ body .cart-modal .custom-btn:hover {
   color: #777;
   margin: 12px 0 56px;
   text-transform: uppercase;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .posts .content span {
   display: block;
@@ -1287,7 +1291,7 @@ body .cart-modal .custom-btn:hover {
   line-height: 30px;
   color: #1e1e1e;
   text-transform: none;
-  font-family: 'BrandonBold', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .posts .custom-btn {
   padding: 29px 41px;
@@ -1441,7 +1445,7 @@ body .cart-modal .custom-btn:hover {
   font-size: 26px;
   color: #e20b50;
   text-transform: capitalize;
-  font-family: 'BrandonBold', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 #countdown .double {
   font-size: 0;
@@ -1612,7 +1616,7 @@ body .cart-modal .custom-btn:hover {
   margin-left: 0;
   display: block;
   color: #878787;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .base-slider .last.text-slider {
   left: 9%;
@@ -1638,7 +1642,7 @@ body .cart-modal .custom-btn:hover {
 }
 .base-slider #countdown {
   margin: 50px 0 40px;
-  font-family: 'BrandonBold', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .base-slider #countdown div {
   width: 113px;
@@ -1660,7 +1664,7 @@ body .cart-modal .custom-btn:hover {
 .base-slider #countdown span.text {
   padding-top: 0;
   font-size: 12px;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
   text-transform: uppercase;
 }
 .product-slider {
@@ -1722,7 +1726,7 @@ footer .widget-title {
   width: 665px;
   padding: 0 30px;
   border-radius: 0;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
   background-color: transparent;
 }
 .subscribe form input:focus {
@@ -1731,22 +1735,22 @@ footer .widget-title {
 .subscribe form input::-webkit-input-placeholder {
   font-size: 16px;
   color: #1e1e1e;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .subscribe form input::-moz-placeholder {
   font-size: 16px;
   color: #1e1e1e;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .subscribe form input:-ms-input-placeholder {
   font-size: 16px;
   color: #1e1e1e;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .subscribe form input:-moz-placeholder {
   font-size: 16px;
   color: #1e1e1e;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .subscribe form .form-group {
   display: -ms-flexbox;
@@ -2409,7 +2413,7 @@ footer .widget-title {
   color: #1e1e1e;
   line-height: 22px;
   display: block;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .widget-recent-product img {
   margin-right: 14px;
@@ -2578,7 +2582,7 @@ footer .widget-title {
 .single-product .inside-single .price {
   font-size: 30px;
   color: #878787;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
   margin-bottom: 28px;
 }
 .single-product .inside-single .price.out-of-stock {
@@ -2621,13 +2625,13 @@ footer .widget-title {
 .single-product .inside-single ul li {
   font-size: 18px;
   color: #1e1e1e;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
   margin-bottom: 16px;
 }
 .single-product .inside-single ul li a {
   color: #777;
   display: inline-block;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
   margin: 0 3px;
 }
 .single-product .inside-single ul li span {
@@ -2658,7 +2662,7 @@ footer .widget-title {
 }
 .single-product .nav-tabs li a {
   font-size: 26px;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
   color: #aaa;
   text-transform: none;
 }
@@ -2751,7 +2755,7 @@ footer .widget-title {
 .single-product .sale-time h6 {
   font-size: 26px;
   color: #aaa;
-  font-family: 'BrandonBold', serif;
+  font-family: 'JuraVariableFont', serif;
   margin-bottom: 7px;
 }
 .single-product .sale-time ul li {
@@ -2864,7 +2868,7 @@ footer .widget-title {
 .error-page p {
   font-size: 38px;
   margin-bottom: 35px;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .error-page .inside {
   display: inline-block;
@@ -2954,7 +2958,7 @@ footer .widget-title {
 }
 .cart-inside table tbody td {
   font-size: 24px;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .cart-inside table .quantity {
   padding: 16px 0 19px 0;
@@ -3155,7 +3159,7 @@ footer .widget-title {
 .checkout-modal .modal-content p {
   font-size: 30px;
   color: #1e1e1e;
-  font-family: 'BrandonBold', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .checkout-modal .btn {
   top: 12px;
@@ -3311,7 +3315,7 @@ footer .widget-title {
   line-height: 42px;
   color: #1e1e1e;
   text-transform: capitalize;
-  font-family: 'BrandonBold', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .post .post-heading a:hover {
   color: #e20b50;
@@ -3320,7 +3324,7 @@ footer .widget-title {
   color: #777;
   font-size: 12px;
   text-transform: uppercase;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .post .category a,
 .post .category span {
@@ -3332,7 +3336,7 @@ footer .widget-title {
 .post .category a {
   color: #777;
   font-size: 12px;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .post .category a.first {
   color: #e20b50;
@@ -3341,7 +3345,7 @@ footer .widget-title {
 .post.quote h2 {
   line-height: 34px;
   font-size: 24px;
-  font-family: 'BrandonMediumItalic', serif;
+  font-family: 'JuraVariableFontItalic', serif;
 }
 .post.link .post-heading a {
   padding: 0 36px;
@@ -3450,7 +3454,7 @@ aside > div {
   color: #e20b50;
   display: block;
   text-align: center;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
   text-transform: uppercase;
 }
 #datepicker table {
@@ -3466,7 +3470,7 @@ aside > div {
 #datepicker thead span {
   font-size: 10px;
   color: #1e1e1e;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
   text-transform: uppercase;
 }
 #datepicker tbody a {
@@ -3489,7 +3493,7 @@ aside > div {
 .widget-post a {
   display: -ms-flexbox;
   display: flex;
-  font-family: 'BrandonBold', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .widget-post a:hover span {
   color: #e20b50;
@@ -3527,7 +3531,7 @@ aside > div {
   color: #777;
   padding: 12px 19px;
   text-transform: uppercase;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
   margin: 0 0 3px 0;
   display: inline-block;
   background-color: #f3f7f6;
@@ -3906,7 +3910,7 @@ aside > div {
 }
 .contact-us-descr-p b {
   font-weight: 700;
-  font-family: 'BrandonBold', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .contact-us-page .custom-btn {
   padding: 28px 50px;
@@ -3950,7 +3954,7 @@ aside > div {
 }
 .single-blog .breadcrumb-top h2 {
   max-width: 970px;
-  font-family: 'BrandonBold', serif;
+  font-family: 'JuraVariableFont', serif;
 }
 .single-blog .breadcrumb-top .breadcrumb {
   margin: 7px 0 0;
@@ -4015,7 +4019,7 @@ aside > div {
 .single-blog .bottom-post .tags span {
   font-size: 18px;
   color: #1e1e1e;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
   display: inline-block;
 }
 .single-blog .bottom-post .tags a {
@@ -4071,7 +4075,7 @@ blockquote {
   margin: 0 auto;
 }
 blockquote p {
-  font-family: 'BrandonMediumItalic', serif;
+  font-family: 'JuraVariableFontItalic', serif;
   font-size: 24px;
   line-height: 34px;
 }
@@ -4083,7 +4087,7 @@ blockquote p {
 }
 .table td {
   padding: 17px 20px !important;
-  font-family: 'BrandonBold', serif;
+  font-family: 'JuraVariableFont', serif;
   border-right: 1px solid #fff;
   border-bottom: 1px solid #fff;
 }
@@ -4144,7 +4148,7 @@ blockquote p {
 .next-post .content-article span {
   font-size: 18px;
   color: #777;
-  font-family: 'BrandonBold', serif;
+  font-family: 'JuraVariableFont', serif;
   text-transform: uppercase;
   display: block;
   margin-bottom: 5px;
@@ -4167,7 +4171,7 @@ blockquote p {
   font-size: 12px;
   text-transform: uppercase;
   color: #878787;
-  font-family: 'BrandonMedium', serif;
+  font-family: 'JuraVariableFont', serif;
   display: block;
   margin-bottom: 20px;
 }

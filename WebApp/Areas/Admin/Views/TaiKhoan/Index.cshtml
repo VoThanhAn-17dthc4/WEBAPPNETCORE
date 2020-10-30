@@ -1,0 +1,109 @@
+﻿@model IEnumerable<WebApp.Areas.Admin.Models.TaiKhoanViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/ACE_Layout_Admin.cshtml";
+}
+<div class="container-fluid" id="container-wrapper">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div style="display:flex">
+            <h1 class="h3 mb-0 text-gray-800">Nhân viên</h1>
+            <a href="@Url.Action("Create", "TaiKhoan", new { area ="Admin" })">
+                <button type="button" class="btn btn-primary" title="Thêm nhân viên" style="margin-left:10px">
+                    Thêm mới <i class="fa fa-plus"></i>
+                </button>
+            </a>
+        </div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./">Trang chủ</a></li>
+            <li class="breadcrumb-item">Nhân viên</li>
+            <li class="breadcrumb-item active" aria-current="page">Nhân viên</li>
+        </ol>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 mb-4">
+            <!-- Simple Tables -->
+            <div class="card">
+                @using (Html.BeginForm("Index", "TaiKhoan", FormMethod.Post))
+                {
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <div class="col-md-8">
+                            <div class="order-search" style="margin: 10px 0px; position: relative;">
+                                <input class="form-control ui-autocomplete-input" name='txtInfo' type="text" placeholder="Nhập tên nhân viên hoặc số điện thoại..." />
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control" name="IdLoaiNV" id="IdLoaiNV">
+                                <option value="">Tìm theo chức vụ</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 8%;border: 1px solid grey;border-left: none;"><i class="fa fa-search"></i></button>
+                    </div>
+                }
+                @using (Html.BeginForm("Delete", "TaiKhoan", FormMethod.Post))
+                {
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Cập nhật</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Tên nhân viên</th>
+                                    <th scope="col">Tên tài khoản</th>
+                                    <th scope="col">Ngày tạo</th>
+                                    <th scope="col">SDT</th>
+                                    <th scope="col">Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <th>
+                                        <a href="@Url.Action("Edit","TaiKhoan",new { @Id = item.Id })">
+                                            <button class="btn btn-primary" title="Chỉnh sửa" style="margin-left:-8px;margin-right:9px;" type="button"><i class="fas fa-pencil-alt"></i></button>
+                                        </a>
+                                        <button class="btn btn-warning" title="Tạm khóa" style="margin:-2px" name="IdDelete" type="submit" value="@item.Id" onclick="return ConfirmDelete()"> <i class="fas fa-trash-alt"></i></button>
+                                    </th>
+                                    <th scope="row">@item.Id</th>
+                                    <th>@item.HoVaTen</th>
+                                    <th>@item.TenTaiKhoan</th>
+                                    <th>@item.NgayTao</th>
+                                    <th>@item.Sdt</th>
+                                    @if (@item.IsDelete == false)
+                                    {
+                                        <th><span class="badge badge-primary">Hoạt động</span></th>
+                                    }
+                                    else
+                                    {
+                                        <th><span class="badge badge-warning">Thôi việc</span></th>
+                                    }
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                <div class="card-footer"></div>
+            </div>
+        </div>
+    </div>
+    <!--Row-->
+</div>
+<script>
+    function ConfirmDelete() {
+        var x = confirm("Bạn có chắc muốn khóa nhân viên đã chọn ?");
+        if (x)
+            return true;
+        else
+            return false;
+    }
+    function ConfirmUnBlock() {
+        var x = confirm("Bạn có chắc muốn mở khóa nhân viên đã chọn ?");
+        if (x)
+            return true;
+        else
+            return false;
+    }
+</script>
+

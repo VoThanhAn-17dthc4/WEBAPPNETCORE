@@ -1,0 +1,120 @@
+﻿@model WebApp.Areas.Admin.Models.HoaDonViewModel
+@using WebApp.Helper; 
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/ACE_Layout_Admin.cshtml";
+    int count = 1;
+}
+<link href="~/assetadmin/css/DetailsPos.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+<div class="container-fluid" id="container-wrapper">
+    <div class="row">
+        <input style="display:none" value="@Model.TrangThaiDonHang" id="trangthai"/>
+        <div class="col-md-12" style="padding-bottom:10px">
+            @using (Html.BeginForm("UpdateStatus", "DonHang"))
+            {
+                if (Model.TrangThaiDonHang == "Chuaduyet")
+                {
+                    <button class="btn btn-mini btn-primary" type="submit" name="Submit" value="@Model.Id">
+                        <i class="fas fa-paper-plane"></i> Xác nhận đơn
+                    </button>
+                }
+                if (Model.TrangThaiDonHang == "Danggiao")
+                {
+                    <button class="btn btn-mini btn-primary" type="submit" name="Submit" value="@Model.Id">
+                        <i class="fas fa-paper-plane"></i> Xác nhận đã giao
+                    </button>
+                }
+            }
+        </div>
+        <div class="col-md-12">
+            <div class="card mb-3">
+                @if (Model.TrangThaiDonHang != "Huydon")
+                {
+                    <div class="p-4 text-center text-white text-lg rounded-top" style="background-color:#FAAC58"><span class="text-uppercase">Mã hóa đơn - </span><span class="text-medium">@Model.Id</span></div>
+                }
+                else
+                {
+                    <div class="p-4 text-center text-white text-lg rounded-top" style="background-color:red"><span class="text-uppercase">Hóa đơn bị hủy- </span><span class="text-medium">@Model.Id</span></div>
+                }
+            <div class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
+                <div class="w-100 text-center py-1 px-2"><span class="text-medium">Khách hàng:</span> @Model.IdKh</div>
+                <div class="w-100 text-center py-1 px-2"><span class="text-medium money1">Tổng tiền:</span> <b class="money1">@Model.TongTien</b></div>
+                <div class="w-100 text-center py-1 px-2"><span class="text-medium">Ngày tạo:</span> @Model.NgayTao</div>
+            </div>
+                <div class="card-body">
+                    <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x" style="position: sticky;">
+                        @if (Model.TrangThaiDonHang != "Huydon")
+                        {
+                            <div class="step completed" id="Create">
+                                <div class="step-icon-wrap">
+                                    <div class="step-icon">
+                                        <i class="pe-7s-cart"></i>
+                                    </div>
+                                </div>
+                                <h4 class="step-title">Tạo hóa đơn</h4>
+                            </div>
+                            <div class="step completed" id="Processing">
+                                <div class="step-icon-wrap">
+                                    <div class="step-icon"><i class="pe-7s-car"></i></div>
+                                </div>
+                                <h4 class="step-title">Giao hàng</h4>
+                            </div>
+                            <div class="step completed" id="Success">
+                                <div class="step-icon-wrap">
+                                    <div class="step-icon"><i class="fa fa-check"></i></div>
+                                </div>
+                                <h4 class="step-title">Hoàn thành</h4>
+                            </div>
+                        }
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+
+                                <th scope="col">Tên sản phẩm</th>
+                                <th scope="col">Số lượng</th>
+                                <th scope="col">Đơn giá </th>
+                                <th scope="col">Size </th>
+                                <th scope="col">Loại SP </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.CTHoaDonViewModel)
+                            {
+                                <tr>
+                                    <th scope="row">@count</th>
+                                    <td>@Comon.NameByIdSP(item.IdSp)</td>
+                                    <td>@item.SoLuong</td>
+                                    <td class="money1">@item.DonGia</td>
+                                    <td>@item.IdSize</td>
+                                    <td>@item.IdLoaisp</td>
+                                </tr>
+                                count++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        debugger
+        var status = $("#trangthai").val();
+        if (status == "Chuaduyet")
+        {
+            $("#Processing").removeClass("completed");
+            $("#Success").removeClass("completed");
+        }
+        if (status == "Danggiao")
+        {
+            $("#Success").removeClass("completed");
+        }
+    });
+</script>
+
+

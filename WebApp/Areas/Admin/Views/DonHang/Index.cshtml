@@ -1,0 +1,122 @@
+﻿@model IEnumerable<WebApp.Areas.Admin.Models.HoaDonViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/ACE_Layout_Admin.cshtml";
+}
+
+<div class="container-fluid" id="container-wrapper">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <div style="display:flex">
+            <h1 class="h3 mb-0 text-gray-800">Hóa Đơn</h1>
+            <a href="@Url.Action("Create", "HoaDon", new { area ="Admin" })">
+                <button type="button" class="btn btn-primary" title="Thêm hóa đơn" style="margin-left:10px">
+                    Thêm mới <i class="fa fa-plus"></i>
+                </button>
+            </a>
+        </div>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./">Trang chủ</a></li>
+            <li class="breadcrumb-item">Quản lý</li>
+            <li class="breadcrumb-item active" aria-current="page">Hóa đơn</li>
+        </ol>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 mb-4">
+            <!-- Simple Tables -->
+            <div class="card">
+                @using (Html.BeginForm("Index", "HoaDon", FormMethod.Get))
+                {
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <div class="col-md-3">
+                            <div class="order-search" style="margin: 10px 0px; position: relative;display:flex">
+                                <input type="text" class="form-control" placeholder="Nhập mã phiếu..." id="search-pro-box" autocomplete="off" name="name">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control" name="idncc" id="idncc">
+                                <option value="">Nhà cung cấp</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control" name="idncc" id="idncc">
+                                <option value="">Nhà cung cấp</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 8%;border: 1px solid grey;border-left: none;"><i class="fa fa-search"></i></button>
+                        <button type="button" class="btn btn-primary" onclick="openpoupmy(false);"><i class="fa fa-file-pdf-o" style="font-size:16px"></i> PDF</button>
+                        <button type="button" class="btn btn-primary" onclick="openpoupmy(true);"><i class="fa fa-file-excel-o" style="font-size:16px"></i> Excel</button>
+                    </div>
+                }
+                @using (Html.BeginForm("Delete", "HoaDon"))
+                {
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Hủy đơn</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Tổng tiền</th>
+                                    <th scope="col">Ngày tạo</th>
+                                    <th scope="col">Khách hàng</th>
+                                    <th scope="col">Địa chỉ</th>
+                                    <th scope="col">SDT</th>
+                                    <th scope="col">Tình trạng đơn hàng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <th>
+                                            @if (@item.TrangThaiDonHang == "Chuaduyet")
+                                            {
+                                                <button class="btn btn-warning" title="Hủy đơn hàng" style="margin:-2px" name="IdDelete" type="submit" value="@item.Id" onclick="return ConfirmDelete()"> <i class="fas fa-check"></i></button>
+                                            }
+                                        </th>
+                                        <th scope="row"><a href="@Url.Action("Details","DonHang",new { @Id = item.Id })">@item.Id</a></th>
+                                        <th>@item.TongTien</th>
+                                        <th>@item.NgayTao</th>
+                                        <th>@item.IdKh</th>
+                                        <td>Địa chỉ</td>
+                                        <td>SDT</td>
+                                        @if (@item.TrangThaiDonHang == "Chuaduyet")
+                                        {
+                                            <th><span class="badge badge-primary">Chưa duyệt đơn</span></th>
+                                        }
+                                        @if (@item.TrangThaiDonHang == "Danggiao")
+                                        {
+                                            <th><span class="badge badge-warning">Đang giao</span></th>
+                                        }
+                                        @if (@item.TrangThaiDonHang == "Hoanthanh")
+                                        {
+                                            <th><span class="badge badge-warning">Hoàn thành</span></th>
+                                        }
+                                        @if (@item.TrangThaiDonHang == "Huydon")
+                                        {
+                                            <th><span class="badge badge-warning">Hủy đơn</span></th>
+                                        }
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+        function ConfirmDelete() {
+            var x = confirm("Bạn có chắc muốn hủy đơn hàng đã chọn ?");
+            if (x)
+                return true;
+            else
+                return false;
+        }
+    </script>
+
+

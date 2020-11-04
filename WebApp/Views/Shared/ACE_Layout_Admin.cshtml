@@ -63,23 +63,17 @@
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center"
-               href="@Url.Action("Index", "Home", new { area ="CMS_Sale" })">
+               href="@Url.Action("Index", "Home", new { area ="Admin" })">
                 <div class="sidebar-brand-icon">
-                    <img src="/Assets/img/logo/logo.jpg">
+                    <img src="~/assets/img/logo/logo.jpg">
                 </div>
                 <div class="sidebar-brand-text mx-3">MyCafe</div>
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
-                <a class="nav-link" href="@Url.Action("Index", "Home", new { area ="CMS_Sale" })">
+                <a class="nav-link" href="@Url.Action("Index", "Home", new { area ="Admin" })">
                     <i class="fas fa-chart-bar"></i>
                     <span>Tổng quan</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" target="_blank" href="@Url.Action("Index", "POS", new { area ="CMS_Sale" })">
-                    <i class="fas fa-desktop"></i>
-                    <span>Máy POS</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -91,12 +85,10 @@
                 <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                     <div id="cc" class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">QUẢN LÝ CỬA HÀNG</h6>
-                        <a class="collapse-item" href="@Url.Action("Index", "PurchaseOrder", new { area ="CMS_Sale" })">Đơn hàng</a>
-                        <a class="collapse-item" href="@Url.Action("Index", "Products", new { area ="CMS_Sale" })">Sản phẩm</a>
-                        <a class="collapse-item" href="@Url.Action("Index", "InOrder", new { area ="CMS_Sale" })">Nhập hàng</a>
-                        <a class="collapse-item" href="@Url.Action("Index", "OutOrder", new { area ="CMS_Sale" })">Xuất hàng</a>
-                        <a class="collapse-item" href="@Url.Action("Index", "Warehouse", new { area ="CMS_Sale" })">Kho hàng</a>
-                        <a class="collapse-item" href="@Url.Action("Index", "ProductType", new { area ="CMS_Sale" })">Loại & Đvt</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "DonHang", new { area ="Admin" })">Đơn hàng</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "SanPhams", new { area ="Admin" })">Sản phẩm</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "PhieuNhap", new { area ="Admin" })">Nhập hàng</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "LoaiSP", new { area ="Admin" })">Loại & Đvt</a>
                     </div>
                 </div>
             </li>
@@ -126,11 +118,11 @@
                 <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">BÁO CÁO</h6>
-                        <a class="collapse-item" href="@Url.Action("BaoCaoDoanhThuTheoNgay", "SaleReport", new { area ="CMS_Sale" })">Doanh số theo ngày</a>
-                        <a class="collapse-item" href="@Url.Action("BaoCaoDoanhThuTheoThang", "SaleReport", new { area ="CMS_Sale" })">Doanh số theo tháng</a>
-                        <a class="collapse-item" href="@Url.Action("BaoCaoTonKho", "SaleReport", new { area ="CMS_Sale" })"> Báo cáo tồn kho</a>
-                        <a class="collapse-item" href="@Url.Action("TopSanPhamBanChay", "SaleReport", new { area ="CMS_Sale" })">Sản phẩm bán chạy</a>
-                        <a class="collapse-item" href="@Url.Action("TopSanPhamKhongBanChay", "SaleReport", new { area ="CMS_Sale" })">Sản phẩm bán chậm</a>
+                        <a class="collapse-item" href="@Url.Action("BaoCaoDoanhThuTheoNgay", "SaleReport", new { area ="Admin" })">Doanh số theo ngày</a>
+                        <a class="collapse-item" href="@Url.Action("BaoCaoDoanhThuTheoThang", "SaleReport", new { area ="Admin" })">Doanh số theo tháng</a>
+                        <a class="collapse-item" href="@Url.Action("BaoCaoTonKho", "SaleReport", new { area ="Admin" })"> Báo cáo tồn kho</a>
+                        <a class="collapse-item" href="@Url.Action("TopSanPhamBanChay", "SaleReport", new { area ="Admin" })">Sản phẩm bán chạy</a>
+                        <a class="collapse-item" href="@Url.Action("TopSanPhamKhongBanChay", "SaleReport", new { area ="Admin" })">Sản phẩm bán chậm</a>
                         @*<a class="collapse-item" href="datatables.html">Lãi lỗ</a>*@
                     </div>
                 </div>

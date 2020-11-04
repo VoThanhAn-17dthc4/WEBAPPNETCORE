@@ -128,17 +128,25 @@ namespace WebApp.Areas.AdminX.Controllers
         // GET: Admin/SanPhams/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            var model = new SanPhamViewModel();
+            var item = Sanpham.SelectById(id);
+            model.Id = item.Id;
+            model.Ten = item.Ten;
+            model.NgayTao = item.NgayTao;
+            model.AnhMoTa = item.AnhMoTa;
+            model.DonGia = item.DonGia;
+            model.NoiDung = item.NoiDung;
+            model.IsDelete = item.IsDelete;
+            var details = Size.SelectAll().Select(item => new SizeViewModel
             {
-                return NotFound();
-            }
-
-            var sanPham = await _context.SanPham.FindAsync(id);
-            if (sanPham == null)
-            {
-                return NotFound();
-            }
-            return View(sanPham);
+                Id = item.Id,
+                IdSp = item.IdSp,
+                SizeNumber = item.SizeNumber,
+                SoLuongKho = item.SoLuongKho,
+                IsDelete = false
+            }).Where(x => x.IdSp == id).ToList();
+            model.SizeViewModel = details;
+            return View(model);
         }
 
         // POST: Admin/SanPhams/Edit/5
@@ -146,34 +154,51 @@ namespace WebApp.Areas.AdminX.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Ten,DonGia,NgayTao,NoiDung,AnhMoTa,SoLuongKho,IsDelete")] SanPham sanPham)
+        public async Task<IActionResult> Edit(SanPhamViewModel model)
         {
-            if (id != sanPham.Id)
+            try
             {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                var _sp = Sanpham.SelectById(model.Id);
+                if (model.AnhMoTa != null)
                 {
-                    _context.Update(sanPham);
-                    await _context.SaveChangesAsync();
+                    var img = UploadedFile(model);
+                    _sp.AnhMoTa = img;
                 }
-                catch (DbUpdateConcurrencyException)
+                _sp.Ten = model.Ten;
+                _sp.NoiDung = model.NoiDung;              
+                _sp.DonGia = model.DonGia;
+                Sanpham.Update(_sp);
+                Sanpham.Save();
+                var idsp = _sp.Id;
+                foreach (var item in model.SizeViewModel)
                 {
-                    if (!SanPhamExists(sanPham.Id))
+                    var _size = Size.SelectById(item.Id);
+                    if(_size == null)
                     {
-                        return NotFound();
+                        var xsize = new Size();
+                        xsize.IdSp = idsp;
+                        xsize.SizeNumber = item.SizeNumber;
+                        xsize.SoLuongKho = item.SoLuongKho;
+                        xsize.IsDelete = false;
+                        Size.Insert(xsize);
+                        Size.Save();
                     }
                     else
                     {
-                        throw;
-                    }
+                        _size.IdSp = idsp;
+                        _size.SizeNumber = item.SizeNumber;
+                        _size.SoLuongKho = item.SoLuongKho;
+                        Size.Update(_size);
+                        Size.Save();
+                    }    
+                   
                 }
-                return RedirectToAction(nameof(Index));
             }
-            return View(sanPham);
+            catch (Exception e)
+            {
+
+            }
+            return View();
         }
 
         // GET: Admin/SanPhams/Delete/5
@@ -241,6 +266,12 @@ namespace WebApp.Areas.AdminX.Controllers
                              sizeid = sizes.SizeNumber.ToString()+product.Id.ToString()
                          };
             return Json(ketqua);
+        }
+        public JsonResult DeleteSizeById(int? Id)
+        {
+            Size.Delete(Id);
+            Size.Save();
+            return Json("ok");
         }
     }
 }

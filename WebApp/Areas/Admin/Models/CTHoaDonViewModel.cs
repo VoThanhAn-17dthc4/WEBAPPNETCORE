@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace WebApp.Models
+namespace WebApp.Areas.Admin.Models
 {
-    public partial class CthoaDon
+    public class CTHoaDonViewModel
     {
         public int Id { get; set; }
         public int? IdHd { get; set; }

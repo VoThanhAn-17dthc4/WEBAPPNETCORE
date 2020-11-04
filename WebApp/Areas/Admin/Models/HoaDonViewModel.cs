@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace WebApp.Models
+namespace WebApp.Areas.Admin.Models
 {
-    public partial class HoaDon
+    public class HoaDonViewModel
     {
         public int Id { get; set; }
         public DateTime? NgayTao { get; set; }
@@ -11,5 +13,6 @@ namespace WebApp.Models
         public int? IdKh { get; set; }
         public bool? IsDelete { get; set; }
         public string TrangThaiDonHang { get; set; }
+        public List<CTHoaDonViewModel> CTHoaDonViewModel { set; get; }
     }
 }

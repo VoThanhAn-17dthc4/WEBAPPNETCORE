@@ -1,62 +1,191 @@
-﻿
-
+﻿@model WebApp.Areas.Admin.Models.SanPhamViewModel
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/ACE_Layout_Admin.cshtml";
+    int i = 0;
 }
 
-<h2>Edit</h2>
-
-<h4>SanPham</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Ten" class="control-label"></label>
-                <input asp-for="Ten" class="form-control" />
-                <span asp-validation-for="Ten" class="text-danger"></span>
+@using (Html.BeginForm("Edit", "SanPhams", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="container-fluid" id="container-wrapper">
+        <div class="row">
+            <div class="col-lg-6">
+                <!-- Form Basic -->
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">TẠO MỚI SẢN PHẨM</h6>
+                    </div>
+                    <div class="card-body" style="margin-top:-13px">
+                        <div class="form-group">
+                            <label>Tên sản phẩm</label>
+                            @Html.TextBoxFor(model => model.Ten, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <div class="text-center">
+                                <label class="btn btn-primary btn-sm btn-white" for="File"><i class="fa fa-upload"></i><span>Tải hình mới</span></label>
+                                <input id="File" name="ProfileImage" type="file" accept="image/*" style="display:none" onchange="$('#upload-file-info').html(this.files[0].name)">
+                                <span class='label label-info' style="display:none" id="upload-file-info"></span>
+                            </div>
+                            <div class="text-center" id="display-image">
+                                <img src="~/assetadmin/img/icons/add-image2.png" title="" id="imgAvt" style="max-height:217px" />
+                            </div>
+                        </div>
+                        <div class="form-group" id="myTable">
+                            <label>Size và Số lượng kho</label>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dynamic_field">
+                                    <tbody class="detailList">
+                                            @foreach (var item in Model.SizeViewModel)
+                                            {
+                                                <tr id="row_@i">
+                                                    <td style="display:none"><input placeholder="Size..." type="text" name="SizeViewModel[@i].Id" value="@item.Id" class="form-control name_list" /></td>
+                                                    <td><input placeholder="Size..." type="text" name="SizeViewModel[@i].SizeNumber" value="@item.SizeNumber" class="form-control name_list" /></td>
+                                                    <td><input placeholder="Số lượng..." type="text" name="SizeViewModel[@i].SoLuongKho" value="@item.SoLuongKho" class="form-control name_list" /></td>
+                                                    @if (i == 0)
+                                                    {
+                                                        <td><button type="button" name="add" id="add" class="btn btn-success">Thêm</button></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td><button type="button" name="remove" id="@i" class="btn btn-danger" onclick="xelete(@i,@item.Id)">X</button></td>
+                                                    }
+                                                </tr>
+                                                i++;
+                                            }
+                                           
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="DonGia" class="control-label"></label>
-                <input asp-for="DonGia" class="form-control" />
-                <span asp-validation-for="DonGia" class="text-danger"></span>
+            <div class="col-lg-6">
+                <!-- General Element -->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Đơn giá</label>
+                            @Html.TextBoxFor(model => model.DonGia, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Nội dung</label>
+                            @Html.TextAreaFor(model => model.NoiDung, new { @class = "form-control" })
+                        </div>
+                        <button class="btn btn-mini btn-primary" id="Save" type="submit" name="Submit">
+                            <i class="ace-icon fa fa-save"></i> Lưu
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="NgayTao" class="control-label"></label>
-                <input asp-for="NgayTao" class="form-control" />
-                <span asp-validation-for="NgayTao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NoiDung" class="control-label"></label>
-                <input asp-for="NoiDung" class="form-control" />
-                <span asp-validation-for="NoiDung" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AnhMoTa" class="control-label"></label>
-                <input asp-for="AnhMoTa" class="form-control" />
-                <span asp-validation-for="AnhMoTa" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SoLuongKho" class="control-label"></label>
-                <input asp-for="SoLuongKho" class="form-control" />
-                <span asp-validation-for="SoLuongKho" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IsDelete" class="control-label"></label>
-                <input asp-for="IsDelete" class="form-control" />
-                <span asp-validation-for="IsDelete" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+}
+<script>
+    $(document).ready(function () {
+        var i = 1;
+        $('#add').click(function () {
+            var count = $('#dynamic_field tr').length;
+            i++;
+            $('#dynamic_field').append('<tr id="row' + i + '"><td><input placeholder="Size..." type="text" name="SizeViewModel[' + count + '].SizeNumber" class="detail_item_qty form-control name_list" /></td><td><input placeholder="Số lượng..." type="text" name="SizeViewModel[' + count + '].SoLuongKho" class="detail_item_price form-control name_list" /></td><td><button type="button" name="remove" id="' + i + '" class="btn btn-danger btn_remove">X</button></td></tr>');
+        });
+        $(document).on('click', '.btn_remove', function () {
+            var button_id = $(this).attr("id");
+            $('#row' + button_id + '').remove();
+            $('.detailList tr').each(function (index, tr) {
+                $(tr).find('.detail_item_id').attr('name', 'SizeViewModel[' + index + '].Id');
+                $(tr).find('.detail_item_qty').attr('name', 'SizeViewModel[' + index + '].SizeNumber');
+                $(tr).find('.detail_item_price').attr('name', 'SizeViewModel[' + index + '].SoLuongKho');
+            });
+        });
+    });
+    function xelete(id,idsize)
+    {
+        ConfirmDelete();
+        $.ajax({
+            url: "/Admin/SanPhams/DeleteSizeById/",
+            dataType: "json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            data: { Id: idsize },
+            success: function (data) {
+               
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            }
+        });
+        $('#row_' + id + '').remove();
+        $('.detailList tr').each(function (index, tr) {
+            $(tr).find('.detail_item_id').attr('name', 'SizeViewModel[' + index + '].Id');
+            $(tr).find('.detail_item_qty').attr('name', 'SizeViewModel[' + index + '].SizeNumber');
+            $(tr).find('.detail_item_price').attr('name', 'SizeViewModel[' + index + '].SoLuongKho');
+        });
+    }
+    function ConfirmDelete() {
+        var x = confirm("Bạn có chắc muốn khóa item đã chọn ?");
+        if (x)
+            return true;
+        else
+            return false;
+    }
+</script>
+<script type="text/javascript">
+    //validation
+    $("#Save").click(function () {
+        var tensp = $("#Ten").val();
+        var dongia = $("#DonGia").val();
+        var loaisp = $("#IdLoai").find("option:selected").val();
+        var dvt = $("#IdDVT").find("option:selected").val();
+        if (tensp == "") {
+            swal({
+                text: "Chưa nhập tên sản phẩm!",
+                icon: "warning",
+                button: "Đồng ý",
+            });
+            return false;
+        }
+        if (dongia == "") {
+            swal({
+                text: "Chưa nhập đơn giá!",
+                icon: "warning",
+                button: "Đồng ý",
+            });
+            return false;
+        }
+        if (loaisp == "") {
+            swal({
+                text: "Chưa chọn phân loại!",
+                icon: "warning",
+                button: "Đồng ý",
+            });
+            return false;
+        }
+        if (dvt == "") {
+            swal({
+                text: "Chưa chọn đơn vị tính!",
+                icon: "warning",
+                button: "Đồng ý",
+            });
+            return false;
+        }
+    });
+    /* The uploader form */
+    $(function () {
+        $(":file").change(function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = imageIsLoaded;
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    });
+
+    function imageIsLoaded(e) {
+        $('#imgAvt').attr('src', e.target.result);
+    };
+
+</script>
 

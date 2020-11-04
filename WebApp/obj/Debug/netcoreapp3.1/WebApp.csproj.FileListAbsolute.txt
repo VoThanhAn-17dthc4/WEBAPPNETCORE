@@ -448,3 +448,7 @@ C:\Users\Admin\source\repos\WebApp\WEBAPPNETCORE\WebApp\obj\Debug\netcoreapp3.1\
 C:\Users\Admin\source\repos\WebApp\WEBAPPNETCORE\WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\PhieuNhap\Details.cshtml.g.cs
 C:\Users\Admin\source\repos\WebApp\WEBAPPNETCORE\WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\TaiKhoan\Create.cshtml.g.cs
 C:\Users\Admin\source\repos\WebApp\WEBAPPNETCORE\WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\TaiKhoan\Index.cshtml.g.cs
+C:\Users\Admin\source\repos\WebApp\WEBAPPNETCORE\WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\DonHang\Index.cshtml.g.cs
+C:\Users\Admin\source\repos\WebApp\WEBAPPNETCORE\WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\DonHang\Details.cshtml.g.cs
+C:\Users\Admin\source\repos\WebApp\WEBAPPNETCORE\WebApp\obj\Debug\netcoreapp3.1\Razor\Views\SanPham\DSSanPham.cshtml.g.cs
+C:\Users\Admin\source\repos\WebApp\WEBAPPNETCORE\WebApp\obj\Debug\netcoreapp3.1\Razor\Views\SanPham\ChiTietSP.cshtml.g.cs

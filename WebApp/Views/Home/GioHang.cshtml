@@ -1,0 +1,278 @@
+﻿@model WebApp.ViewModels.GioHangViewModel
+@using Microsoft.AspNetCore.Http;
+@using WebApp.Helper
+@{
+    ViewData["Title"] = "GioHang";
+    Layout = "~/Views/Shared/ACE_Layout.cshtml";
+    int i = 1;
+    int x = 0;
+}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<style>
+    .bg-dark {
+        background-color: #343a40 !important;
+    }
+
+    .qty .count {
+        color: #000;
+        display: inline-block;
+        vertical-align: top;
+        font-size: 25px;
+        font-weight: 700;
+        line-height: 30px;
+        padding: 0 2px;
+        min-width: 35px;
+        text-align: center;
+    }
+
+    .qty .plus {
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: top;
+        color: white;
+        width: 30px;
+        height: 30px;
+        font: 30px/1 Arial,sans-serif;
+        text-align: center;
+        border-radius: 50%;
+    }
+
+    .qty .minus {
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: top;
+        color: white;
+        width: 30px;
+        height: 30px;
+        font: 30px/1 Arial,sans-serif;
+        text-align: center;
+        border-radius: 50%;
+        background-clip: padding-box;
+    }
+
+    div {
+        text-align: center;
+    }
+
+    .minus:hover {
+        background-color: #717fe0 !important;
+    }
+
+    .plus:hover {
+        background-color: #717fe0 !important;
+    }
+    /*Prevent text selection*/
+    span {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+    }
+
+    input {
+        border: 0;
+        width: 2%;
+    }
+
+        nput::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input:disabled {
+            background-color: white;
+        }
+
+    .mt-5, .my-5 {
+        margin-top: 1rem !important;
+    }
+</style>
+<div class="wrapper">
+    <!--================= Breadcrumb ====================-->
+    <div class="breadcrumb-top bg-yellow">
+        <div class="container">
+            <h2>Giỏ Hàng</h2>
+            <ol class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li class="active">Cart</li>
+            </ol><!--breadcrumb-->
+        </div>
+    </div>
+    <!--================= End of Breadcrumb ====================-->
+    <div class="container">
+        @using (Html.BeginForm("UpdateSL", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <!--================= Cart Inside ====================-->
+        <div class="cart-inside">
+            <h3>Giỏ hàng của bạn</h3>
+            <table id="table">
+                <thead>
+                    <tr>
+                        <td class="table-product">Ảnh SP</td>
+                        <td class="text-center">Tên SP</td>
+                        <td class="text-center">Size</td>
+                        <td class="text-center">Đơn giá</td>
+                        <td class="text-center">Số Lượng</td>
+                        <td class="text-center">Tổng</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.CTGioHangViewModel != null)
+                    {
+                        @foreach (var item in Model.CTGioHangViewModel)
+                        {
+                            <tr>
+                                <td class="product-thumbnail"><a href=""><img src="~/imageproducts/@Comon.ImgByIdSP(item.IdSp)" alt="cart-product" style="width:50%"></a></td>
+                                <td class="product-name text-center" data-title="Tên SP">@Comon.NameByIdSP(item.IdSp)</td>
+                                <td class="product-name text-center" data-title="Size">@item.IdSize</td>
+                                <td class="product-price text-center" data-title="Price"><span class="price" id="dongia_@i">@item.DonGia</span></td>
+                                <td class="product-quantity text-center" data-title="Quantity">
+                                    <div class="qty mt-5">
+                                        <p class="minus bg-dark" onclick="Giam(@i);">-</p>
+                                        <input type="number" class="count" id="soluong_@i" value="@item.SoLuong">
+                                        <input style="display:none" name="CTGioHangViewModel[@x].SoLuong" id="soluong1_@i" value="@item.SoLuong" />
+                                        <input style="display:none" name="CTGioHangViewModel[@x].Id" value="@item.Id" />
+                                        <p class="plus bg-dark" onclick="Tang(@i);">+</p>
+                                    </div>
+                                </td>
+                                <td class="product-price text-center" data-title="Total"><span class="price" id="tongtien_@i"></span></td>
+                                <td class="product-remove text-right"><img src="/assets/images/remove.png" alt="remove" onclick="DeleteSP(@item.Id,this);"></td>
+                            </tr>
+                            i++;
+                            x++;
+                        }
+                    }
+                    else
+                    {
+                        <tr><td>Rỗng.</td></tr>
+                    }
+
+                </tbody>
+            </table>
+            @if (Model.CTGioHangViewModel != null)
+            {
+                <div class="bottom-table">
+                    <span><button type="submit" class="custom-btn"><img src="assets/images/refresh.png" alt="">Cập nhật giỏ hàng</button></span>
+                </div>
+                }
+
+                <!--================= End of Cart Inside ====================-->
+            </div>
+        }
+        <!--================= Checkout ====================-->
+        @using (Html.BeginForm("ThanhToan", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="checkout bg-grey">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 center">
+                            <form>
+                                <div class="form-group">
+                                    <input name="diachi" placeholder="Địa chỉ nhận hàng" class="border-all border-color-extra-gray" value="@Context.Session.GetString("diachi")">
+                                </div>
+                                <div class="form-group">
+                                    <input name="sdt" placeholder="Số điện thoại nhận hàng" class="border-all border-color-extra-gray" value="@Context.Session.GetString("sdt")">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <!--===================== Checkout Form ========================-->
+                            <div class="checkout-form">
+                                <div class="total">
+                                    <span>Tổng tiền thanh toán :</span><span class="price" id="tongtien"></span>
+                                </div><!--total-->
+                                @if (Model.CTGioHangViewModel != null)
+                                {
+                                    <div class="text-right"><button type="submit" class="custom-btn" data-toggle="modal" data-target="#checkout-modal">Thanh toán đơn hàng</button></div>
+                                }
+                                </div>
+                            <!--===================== End of Checkout Form ========================-->
+                            <!--===================== Checkout Modal ========================-->
+                            <div class="modal checkout-modal fade" id="checkout-modal" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <h3>Thank you</h3>
+                                        <p>for your purchase!</p>
+                                        <button type="button" class="btn" data-dismiss="modal"><img src="assets/images/close.png" alt="close"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--===================== End of Checkout Modal ========================-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+            <!--================= End of Checkout ====================-->
+        </div>
+</div><!--wrapper-->
+<script>
+    function newtest2(e) {
+        $(e).parents('tr').remove();
+            }
+            function ConfirmDelete() {
+                var x = confirm("Bạn có chắc muốn khóa item đã chọn ?");
+                if (x)
+                    return true;
+                else
+                    return false;
+            }
+            function DeleteSP(id,e) {
+                ConfirmDelete();
+                newtest2(e);
+        $.ajax({
+                url: "/Home/DeleteSP/",
+            dataType: "json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            data: { Id: id },
+            success: function (data) {
+
+                    },
+            error: function (xhr) {
+                        console.log(xhr);
+                    }
+                });
+            TongTienSP();
+        }
+        function Tang(i) {
+        $('#soluong_' + i + '').val(parseInt($('#soluong_' + i + '').val()) + 1);
+        $('#soluong1_' + i + '').val(parseInt($('#soluong1_' + i + '').val()) + 1);
+            TongTienSP();
+        }
+        function Giam(i) {
+        $('#soluong_' + i + '').val(parseInt($('#soluong_' + i + '').val()) - 1);
+            if ($('#soluong_' + i + '').val() == 0) {
+        $('#soluong_' + i + '').val(1);
+            }
+        $('#soluong1_' + i + '').val(parseInt($('#soluong1_' + i + '').val()) - 1);
+            if ($('#soluong1_' + i + '').val() == 0) {
+            $('#soluong1_' + i + '').val(1);
+            }
+            TongTienSP();
+        }
+    $(document).ready(function () {
+            TongTienSP();
+        });
+
+    function TongTienSP() {
+            var tongtien = 0;
+        $('.count').prop('disabled', true);
+            var rowCount = $('#table tr').length - 1;
+        $('table > tbody  > tr').each(function (index, tr) {
+                var dongia = $("#dongia_" + (index + 1) + "").text();
+                var soluong = $("#soluong_" + (index + 1) + "").val();
+            $("#tongtien_" + (index + 1) + "").text(dongia * soluong);
+                tongtien += parseInt($("#tongtien_" + (index + 1) + "").text());
+            });
+        debugger
+        if (tongtien.toString() == "NaN") {
+            tongtien = 0;
+        }
+        $("#tongtien").text(tongtien+" VNĐ");
+            console.log(tongtien);
+        }
+</script>

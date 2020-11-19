@@ -14,5 +14,6 @@ namespace WebApp.Models
         public double? TongTien { get; set; }
         public bool? IsAdmin { get; set; }
         public bool? IsDelete { get; set; }
+        public string DiaChi { get; set; }
     }
 }

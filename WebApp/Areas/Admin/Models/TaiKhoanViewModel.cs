@@ -13,6 +13,7 @@ namespace WebApp.Areas.Admin.Models
         public DateTime? NgayTao { get; set; }
         public string HoVaTen { get; set; }
         public string Sdt { get; set; }
+        public string DiaChi { get; set; }
         public double? TongTien { get; set; }
         public bool? IsAdmin { get; set; }
         public bool? IsDelete { get; set; }

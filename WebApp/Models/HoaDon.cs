@@ -11,5 +11,7 @@ namespace WebApp.Models
         public int? IdKh { get; set; }
         public bool? IsDelete { get; set; }
         public string TrangThaiDonHang { get; set; }
+        public string SDT { get; set; }
+        public string DiaChi { get; set; }
     }
 }

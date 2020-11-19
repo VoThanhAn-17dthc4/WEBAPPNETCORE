@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+using WebApp.Areas.Admin.Models;
 using WebApp.Interface;
+using WebApp.Models;
 using WebApp.Repository;
 
 namespace WebApp.Helper
@@ -13,6 +16,7 @@ namespace WebApp.Helper
     public static class Comon
     {
         private static ISanpham Sanpham = new SanPhamRepository();
+        private static ILoaiSP LoaiSP = new LoaiSPRepository();
 
         public static DateTime GetFistDayInMonth(int year, int month)
         {
@@ -46,6 +50,29 @@ namespace WebApp.Helper
             var model = Sanpham.SelectById(id);
             var name = model.Ten;
             return name;
+        }
+        public static string NameByIdLoaiSP(int? id)
+        {
+            var model = LoaiSP.SelectById(id);
+            var name = model.Ten;
+            return name;
+        }
+        public static string ImgByIdSP(int? id)
+        {
+            var model = Sanpham.SelectById(id);
+            var name = model.AnhMoTa;
+            return name;
+        }
+        public static IEnumerable<LoaiSPViewModel> loaisp()
+        {
+            IEnumerable<LoaiSPViewModel> model = LoaiSP.SelectAll().Select(
+                item => new LoaiSPViewModel
+                {
+                    Id = item.Id,
+                    Ten = item.Ten,
+                    IsDelete = item.IsDelete
+                });
+            return model;
         }
     }
 }

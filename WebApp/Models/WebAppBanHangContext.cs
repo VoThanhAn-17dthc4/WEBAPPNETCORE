@@ -32,6 +32,8 @@ namespace WebApp.Models
         public virtual DbSet<SanPham> SanPham { get; set; }
         public virtual DbSet<Size> Size { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoan { get; set; }
+        public virtual DbSet<Giohang> Giohang { get; set; }
+        public virtual DbSet<CtgioHang> CtgioHang { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

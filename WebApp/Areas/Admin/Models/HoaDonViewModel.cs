@@ -13,6 +13,8 @@ namespace WebApp.Areas.Admin.Models
         public int? IdKh { get; set; }
         public bool? IsDelete { get; set; }
         public string TrangThaiDonHang { get; set; }
+        public string SDT { get; set; }
+        public string DiaChi { get; set; }
         public List<CTHoaDonViewModel> CTHoaDonViewModel { set; get; }
     }
 }

@@ -18,7 +18,7 @@ namespace WebApp.Areas.Admin.Controllers
         private readonly IPhieuNhap PhieuNhap = new PhieuNhapRepository();
         private readonly ICTPhieuNhap CTPhieuNhap = new CTPhieuNhapRepository();
         private readonly ISize Size = new SizeRepository();
-        public IActionResult Index()
+        public IActionResult Index(string id)
         {
             IEnumerable<PhieuNhapViewModel> model = PhieuNhap.SelectAll().Select(
                 item => new PhieuNhapViewModel
@@ -31,6 +31,10 @@ namespace WebApp.Areas.Admin.Controllers
                     TongTien = item.TongTien,
                     TieuDe = item.TieuDe
                 }).OrderByDescending(x => x.NgayTao).Where(x => x.IsDelete != true);
+            if (id != null)
+            {
+                model = model.Where(x => x.Id.ToString().Contains(id.ToString())).ToList();
+            }
             return View(model);
         }
         public IActionResult Details(int? id)

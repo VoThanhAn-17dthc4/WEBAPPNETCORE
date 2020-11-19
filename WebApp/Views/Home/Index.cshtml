@@ -8,28 +8,16 @@
     <div class="item">
         <img src="~/assetadmin//img/banner/Untitled-1.png" alt="slider">
         <div class="text-slider">
-            <h2>Nature has always<br>cared for us!</h2>
-            <a href="#" class="custom-btn text-center yellow">top tips</a>
         </div><!--text-slider-->
     </div><!--item-->
     <div class="item slide-two">
         <img src="~/assetadmin//img/banner/Untitled-2.png" alt="slider">
         <div class="text-slider">
-            <h2>Organic pancakes<br>homestyle</h2>
-            <span class="price">12.99$</span>
-            <a href="#" class="custom-btn text-center yellow">top tips</a>
         </div><!--text-slider-->
     </div><!--item-->
     <div class="item slide-three">
         <img src="~/assetadmin//img/banner/Untitled-3.png" alt="slider">
         <div class="text-slider last">
-            <h2>One day sale!<br>large avocados<span class="text-pink">for $5</span></h2>
-            <div id="countdown">
-                <div><span class="hours">00</span><span class="text">hrs</span></div>
-                <div><span class="minutes">00</span><span class="text">min</span></div>
-                <div><span class="seconds">00</span><span class="text">sec</span></div>
-            </div>
-            <a href="#" class="custom-btn green text-center">top tips</a>
         </div><!--text-slider-->
     </div><!--item-->
 </div>
@@ -39,73 +27,30 @@
 <div class="container-large">
     <div class="product-slider">
         <div class="title-head">
-            <h2 class="text-black">Xu hướng hiện tại</h2>
+            <h2 class="text-black">Mẫu giày mới</h2>
             <p>Mẫu giày Running</p>
         </div>
         <div class="slider-product owl-carousel owl-theme">
-            <div class="item">
-                <div class="product">
-                    <div class="images text-center">
-                        <a href="single-product.html"><img src="https://assets.adidas.com/images/h_2000,f_auto,q_auto:sensitive,fl_lossy/1ab1f8c6e80f4c6eadc4abad01156e6d_9366/NMD_R1_Mau_djen_FY1434_01_standard.jpg" alt="product1"></a>
-                        <div class="button-group">
-                            <a href="cart.html" class="custom-btn pink"><i class="fa fa-shopping-bag"></i></a>
-                            <a href="#" class="custom-btn pink"><i class="fa fa-search"></i></a>
-                        </div><!--button-group-->
-                    </div><!--images-->
-                    <div class="info-product">
-                        <a href="single-product.html" class="title">Daiya - Cheddar</a>
-                        <span class="price">$20</span>
-                    </div><!--info-product-->
-                </div><!--product-->
-            </div>
-            <div class="item">
-                <div class="product">
-                    <div class="images text-center">
-                        <a href="single-product.html"><img src="http://via.placeholder.com/160x230" alt="product2"></a>
-                        <div class="button-group">
-                            <a href="cart.html" class="custom-btn pink"><i class="fa fa-shopping-bag"></i></a>
-                            <a href="#" class="custom-btn pink"><i class="fa fa-search"></i></a>
-                        </div><!--button-group-->
-                    </div><!--images-->
-                    <div class="info-product">
-                        <a href="single-product.html" class="title">Vegan Burger - Veggie Mix</a>
-                        <span class="price">$9.99</span>
-                    </div><!--info-product-->
-                </div><!--product-->
-            </div>
-            <div class="item">
-                <div class="product">
-                    <div class="images text-center">
-                        <a href="single-product.html"><img src="http://via.placeholder.com/160x230" alt="product3"></a>
-                        <div class="button-group">
-                            <a href="cart.html" class="custom-btn pink"><i class="fa fa-shopping-bag"></i></a>
-                            <a href="#" class="custom-btn pink"><i class="fa fa-search"></i></a>
-                        </div><!--button-group-->
-                    </div><!--images-->
-                    <div class="info-product">
-                        <a href="single-product.html" class="title">Vegan Protein</a>
-                        <span class="price">$50</span>
-                    </div><!--info-product-->
-                </div><!--product-->
-            </div>
-            <div class="item">
-                <div class="product">
-                    <div class="images text-center">
-                        <a href="single-product.html"><img src="http://via.placeholder.com/160x230" alt="product4"></a>
-                        <div class="button-group">
-                            <a href="cart.html" class="custom-btn pink"><i class="fa fa-shopping-bag"></i></a>
-                            <a href="#" class="custom-btn pink"><i class="fa fa-search"></i></a>
-                        </div><!--button-group-->
-                    </div><!--images-->
-                    <div class="info-product">
-                        <a href="single-product.html" class="title">Over the Moo - Ice Cream</a>
-                        <span class="price">$7.99</span>
-                    </div><!--info-product-->
-                </div><!--product-->
-            </div>
+            @foreach (var item in ViewBag.spmoi)
+            {
+                <div class="item">
+                    <div class="product">
+                        <div class="images text-center">
+                            <a href="@Url.Action("ChiTietSP","SanPham",new { @Id = item.Id })"><img src="~/imageproducts/@item.AnhMoTa" alt="product5"></a>
+                            <div class="button-group">
+                                <a href="@Url.Action("ChiTietSP","SanPham",new { @Id = item.Id })" class="custom-btn pink"><i class="fa fa-search"></i></a>
+                            </div><!--button-group-->
+                        </div><!--images-->
+                        <div class="info-product">
+                            <a href="@Url.Action("ChiTietSP","SanPham",new { @Id = item.Id })" class="title">@item.Ten</a>
+                            <span class="price">@item.DonGia</span>
+                        </div><!--info-product-->
+                    </div><!--product-->
+                </div>
+            }
         </div><!--slider-product-->
         <div class="text-center">
-            <a href="shop.html" class="custom-btn text-center green"><span>Xem toàn bộ</span></a>
+            <a asp-action="DSSanPham" asp-controller="SanPham" class="custom-btn text-center green"><span>Xem toàn bộ</span></a>
         </div>
     </div><!--product-slider-->
 </div>
@@ -116,7 +61,7 @@
             <div class="col-md-6 col-sm-12">
                 <div class="text">
                     <h2>Sắn sàng<br>cho cuộc chiến</h2>
-                    <a href="shop.html" class="custom-btn text-center white">Xem sản phẩm</a>
+                    <a asp-action="DSSanPham" asp-controller="SanPham" class="custom-btn text-center white">Xem sản phẩm</a>
                 </div><!--text-->
             </div>
         </div>
@@ -130,133 +75,25 @@
             <p>Nhóm giày Running</p>
         </div>
         <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="product">
-                    <div class="images">
-                        <a href="single-product.html"><img src="http://via.placeholder.com/160x230" alt="product5"></a>
-                        <div class="button-group">
-                            <a href="cart.html" class="custom-btn pink"><i class="fa fa-shopping-bag"></i></a>
-                            <a href="#" class="custom-btn pink"><i class="fa fa-search"></i></a>
-                        </div><!--button-group-->
-                    </div><!--images-->
-                    <div class="info-product">
-                        <a href="single-product.html" class="title">ORS - Olive Oil</a>
-                        <span class="price">
-                            <del>$9.99</del>
-                            <ins>$6.99</ins>
-                        </span>
-                    </div><!--info-product-->
-                </div><!--product-->
+            @foreach (var item in ViewBag.model)
+            {
+                <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="product">
+                        <div class="images text-center">
+                            <a href="@Url.Action("ChiTietSP","SanPham",new { @Id = item.Id })"><img src="~/imageproducts/@item.AnhMoTa" alt="product5"></a>
+                            <div class="button-group">
+                                <a href="@Url.Action("ChiTietSP","SanPham",new { @Id = item.Id })" class="custom-btn pink"><i class="fa fa-search"></i></a>
+                            </div><!--button-group-->
+                        </div><!--images-->
+                        <div class="info-product">
+                            <a href="@Url.Action("ChiTietSP","SanPham",new { @Id = item.Id })" class="title">@item.Ten</a>
+                            <span class="price">@item.DonGia</span>
+                        </div><!--info-product-->
+                    </div><!--product-->
+                </div>
+            }
             </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="product">
-                    <div class="images">
-                        <a href="single-product.html"><img src="http://via.placeholder.com/160x230" alt="product5"></a>
-                        <div class="button-group">
-                            <a href="cart.html" class="custom-btn pink"><i class="fa fa-shopping-bag"></i></a>
-                            <a href="#" class="custom-btn pink"><i class="fa fa-search"></i></a>
-                        </div><!--button-group-->
-                    </div><!--images-->
-                    <div class="info-product">
-                        <a href="single-product.html" class="title">Organic - Agave Five</a>
-                        <span class="price">$9.99</span>
-                    </div><!--info-product-->
-                </div><!--product-->
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="product">
-                    <div class="images">
-                        <a href="single-product.html"><img src="http://via.placeholder.com/160x230" alt="product5"></a>
-                        <div class="button-group">
-                            <a href="cart.html" class="custom-btn pink"><i class="fa fa-shopping-bag"></i></a>
-                            <a href="#" class="custom-btn pink"><i class="fa fa-search"></i></a>
-                        </div><!--button-group-->
-                    </div><!--images-->
-                    <div class="info-product">
-                        <a href="single-product.html" class="title">Organic Girl - Romanie</a>
-                        <span class="price">$4.79</span>
-                    </div><!--info-product-->
-                </div><!--product-->
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="product">
-                    <div class="images">
-                        <a href="single-product.html"><img src="http://via.placeholder.com/160x230" alt="product5"></a>
-                        <div class="button-group">
-                            <a href="cart.html" class="custom-btn pink"><i class="fa fa-shopping-bag"></i></a>
-                            <a href="#" class="custom-btn pink"><i class="fa fa-search"></i></a>
-                        </div><!--button-group-->
-                    </div><!--images-->
-                    <div class="info-product">
-                        <a href="single-product.html" class="title">Beach Nut - Coldpure</a>
-                        <span class="price">$6.49</span>
-                    </div><!--info-product-->
-                </div><!--product-->
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="product">
-                    <div class="images">
-                        <a href="single-product.html"><img src="http://via.placeholder.com/160x230" alt="product5"></a>
-                        <div class="button-group">
-                            <a href="cart.html" class="custom-btn pink"><i class="fa fa-shopping-bag"></i></a>
-                            <a href="#" class="custom-btn pink"><i class="fa fa-search"></i></a>
-                        </div><!--button-group-->
-                    </div><!--images-->
-                    <div class="info-product">
-                        <a href="single-product.html" class="title">Beech Nut - Just Pumpkin</a>
-                        <span class="price">$9.69</span>
-                    </div><!--info-product-->
-                </div><!--product-->
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="product">
-                    <div class="images">
-                        <a href="single-product.html"><img src="http://via.placeholder.com/160x230" alt="product5"></a>
-                        <div class="button-group">
-                            <a href="cart.html" class="custom-btn pink"><i class="fa fa-shopping-bag"></i></a>
-                            <a href="#" class="custom-btn pink"><i class="fa fa-search"></i></a>
-                        </div><!--button-group-->
-                    </div><!--images-->
-                    <div class="info-product">
-                        <a href="single-product.html" class="title">Detox Zero</a>
-                        <span class="price">$16.99</span>
-                    </div><!--info-product-->
-                </div><!--product-->
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="product">
-                    <div class="images">
-                        <a href="single-product.html"><img src="http://via.placeholder.com/160x230" alt="product5"></a>
-                        <div class="button-group">
-                            <a href="cart.html" class="custom-btn pink"><i class="fa fa-shopping-bag"></i></a>
-                            <a href="#" class="custom-btn pink"><i class="fa fa-search"></i></a>
-                        </div><!--button-group-->
-                    </div><!--images-->
-                    <div class="info-product">
-                        <a href="single-product.html" class="title">Mooala Original</a>
-                        <span class="price">$10.99</span>
-                    </div><!--info-product-->
-                </div><!--product-->
-            </div>
-            <div class="col-md-3 col-sm-6 col-xs-12">
-                <div class="product">
-                    <div class="images">
-                        <a href="single-product.html"><img src="http://via.placeholder.com/160x230" alt="product5"></a>
-                        <div class="button-group">
-                            <a href="cart.html" class="custom-btn pink"><i class="fa fa-shopping-bag"></i></a>
-                            <a href="#" class="custom-btn pink"><i class="fa fa-search"></i></a>
-                        </div><!--button-group-->
-                    </div><!--images-->
-                    <div class="info-product">
-                        <a href="single-product.html" class="title">Low Cow - Lite Ice Cream</a>
-                        <span class="price">$9.99</span>
-                    </div><!--info-product-->
-                </div><!--product-->
-            </div>
-        </div>
-        <div class="text-center"><a href="shop.html" class="custom-btn text-center green">Xem toàn bộ</a></div>
+        <div class="text-center"><a asp-action="DSSanPham" asp-controller="SanPham" class="custom-btn text-center green">Xem toàn bộ</a></div>
     </div><!--grid-product-->
     <div class="banner-color">
         <div class="row">
@@ -288,85 +125,7 @@
         <div class="row">
             <div class="col-md-6 text-center">
                 <div class="inside">
-                    <div class="title-head">
-                        <h2 class="text-black">Healthy Lunch</h2>
-                        <p>Be Healty Organic Food</p>
-                    </div>
-                    <ul class="week nav nav-tabs">
-                        <li><a href="#sunday" data-toggle="tab">S</a></li>
-                        <li class="active"><a href="#monday" data-toggle="tab" aria-expanded="true">M</a></li>
-                        <li><a href="#tuesday" data-toggle="tab">T</a></li>
-                        <li><a href="#wednesday" data-toggle="tab">W</a></li>
-                        <li><a href="#thursday" data-toggle="tab">T</a></li>
-                        <li><a href="#friday" data-toggle="tab">F</a></li>
-                        <li><a href="#saturday" data-toggle="tab">S</a></li>
-                    </ul><!--week-->
-                    <div class="tab-content">
-                        <div class="tab-pane fade" id="sunday">
-                            <ul>
-                                <li class="first">sunday:</li>
-                                <li>4 oz. grilled chicken breast</li>
-                                <li>1/2 cup sliced strawberries</li>
-                                <li>1/2 cup steamed spinach w/ salt and pepper</li>
-                                <li>1/2 cup brown rice, steamed</li>
-                            </ul>
-                        </div>
-                        <div class="tab-pane fade in active" id="monday">
-                            <ul>
-                                <li class="first">monday:</li>
-                                <li>4 oz. grilled chicken breast</li>
-                                <li>1/2 cup sliced strawberries</li>
-                                <li>1/2 cup steamed spinach w/ salt and pepper</li>
-                                <li>1/2 cup brown rice, steamed</li>
-                            </ul>
-                        </div>
-                        <div class="tab-pane fade" id="tuesday">
-                            <ul>
-                                <li class="first">tuesday:</li>
-                                <li>4 oz. grilled chicken breast</li>
-                                <li>1/2 cup sliced strawberries</li>
-                                <li>1/2 cup steamed spinach w/ salt and pepper</li>
-                                <li>1/2 cup brown rice, steamed</li>
-                            </ul>
-                        </div>
-                        <div class="tab-pane fade" id="wednesday">
-                            <ul>
-                                <li class="first">wednesday:</li>
-                                <li>4 oz. grilled chicken breast</li>
-                                <li>1/2 cup sliced strawberries</li>
-                                <li>1/2 cup steamed spinach w/ salt and pepper</li>
-                                <li>1/2 cup brown rice, steamed</li>
-                            </ul>
-                        </div>
-                        <div class="tab-pane fade" id="thursday">
-                            <ul>
-                                <li class="first">thursday:</li>
-                                <li>4 oz. grilled chicken breast</li>
-                                <li>1/2 cup sliced strawberries</li>
-                                <li>1/2 cup steamed spinach w/ salt and pepper</li>
-                                <li>1/2 cup brown rice, steamed</li>
-                            </ul>
-                        </div>
-                        <div class="tab-pane fade" id="friday">
-                            <ul>
-                                <li class="first">friday:</li>
-                                <li>4 oz. grilled chicken breast</li>
-                                <li>1/2 cup sliced strawberries</li>
-                                <li>1/2 cup steamed spinach w/ salt and pepper</li>
-                                <li>1/2 cup brown rice, steamed</li>
-                            </ul>
-                        </div>
-                        <div class="tab-pane fade" id="saturday">
-                            <ul>
-                                <li class="first">saturday:</li>
-                                <li>4 oz. grilled chicken breast</li>
-                                <li>1/2 cup sliced strawberries</li>
-                                <li>1/2 cup steamed spinach w/ salt and pepper</li>
-                                <li>1/2 cup brown rice, steamed</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <a href="blog.html" class="custom-btn text-center green">order now</a>
+                    <a asp-action="DSSanPham" asp-controller="SanPham" class="custom-btn text-center green">Đặt hàng ngay</a>
                 </div><!--inside-->
             </div>
         </div>

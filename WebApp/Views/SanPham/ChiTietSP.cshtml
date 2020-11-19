@@ -3,264 +3,131 @@
     ViewData["Title"] = "ChiTietSP";
     Layout = "~/Views/Shared/ACE_Layout.cshtml";
 }
-
-<!--================= Single Product  ====================-->
-<div class="vertical-slider">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-7">
-                <!--================= Single Product Slider  ====================-->
-                <div class="single-product-slider">
-                    <div class="slider-for">
-                        <div><img src="http://via.placeholder.com/570x570" alt="single-product"></div>
-                        <div><img src="http://via.placeholder.com/570x570" alt="single-product"></div>
-                        <div><img src="http://via.placeholder.com/570x570" alt="single-product"></div>
-                        <div><img src="http://via.placeholder.com/570x570" alt="single-product"></div>
-                        <div><img src="http://via.placeholder.com/570x570" alt="single-product"></div>
-                        <div><img src="http://via.placeholder.com/570x570" alt="single-product"></div>
-                    </div>
-                    <div class="slider-nav">
-                        <div><img src="http://via.placeholder.com/133x133" alt="single-product-mini"></div>
-                        <div><img src="http://via.placeholder.com/133x133" alt="single-product-mini"></div>
-                        <div><img src="http://via.placeholder.com/133x133" alt="single-product-mini"></div>
-                        <div><img src="http://via.placeholder.com/133x133" alt="single-product-mini"></div>
-                        <div><img src="http://via.placeholder.com/133x133" alt="single-product-mini"></div>
-                        <div><img src="http://via.placeholder.com/133x133" alt="single-product-mini"></div>
-                    </div>
-                    <div class="zoom" data-toggle="modal" data-target="#zoom-modal">
-                        <img src="assets/images/zoom.png" alt="zoom">
-                    </div>
-                </div>
-                <!--================= End of Single Product Slider  ====================-->
-                <div class="modal fade" id="zoom-modal" tabindex="-1" role="dialog">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            </div>
-                            <div class="modal-body">
-                                <div id="carousel" class="carousel slide" data-ride="carousel">
-                                    <div class="carousel-inner">
-                                        <div class="item active">
-                                            <img src="http://via.placeholder.com/570x570" alt="single">
-                                        </div><!--item-->
-                                        <div class="item">
-                                            <img src="http://via.placeholder.com/570x570" alt="single">
-                                        </div><!--item-->
-                                        <div class="item">
-                                            <img src="http://via.placeholder.com/570x570" alt="single">
-                                        </div><!--item-->
-                                        <div class="item">
-                                            <img src="http://via.placeholder.com/570x570" alt="single">
-                                        </div><!--item-->
-                                        <div class="item">
-                                            <img src="http://via.placeholder.com/570x570" alt="single">
-                                        </div><!--item-->
-                                        <div class="item">
-                                            <img src="http://via.placeholder.com/570x570" alt="single">
-                                        </div><!--item-->
-                                        <div class="item">
-                                            <img src="http://via.placeholder.com/570x570" alt="single">
-                                        </div><!--item-->
-                                        <div class="item">
-                                            <img src="http://via.placeholder.com/570x570" alt="single">
-                                        </div><!--item-->
-                                    </div><!--carousel-inner-->
-                                </div><!--carousel-->
-                                <div id="thumbcarousel" class="carousel slide" data-interval="false">
-                                    <div class="carousel-inner">
-                                        <div class="item active">
-                                            <div data-target="#carousel" data-slide-to="0" class="thumb">
-                                                <img src="http://via.placeholder.com/133x133" alt="product">
-                                            </div>
-                                            <div data-target="#carousel" data-slide-to="1" class="thumb">
-                                                <img src="http://via.placeholder.com/133x133" alt="product">
-                                            </div>
-                                            <div data-target="#carousel" data-slide-to="2" class="thumb">
-                                                <img src="http://via.placeholder.com/133x133" alt="product">
-                                            </div>
-                                            <div data-target="#carousel" data-slide-to="3" class="thumb">
-                                                <img src="http://via.placeholder.com/133x133" alt="product">
-                                            </div>
-                                        </div><!--item-->
-                                        <div class="item">
-                                            <div data-target="#carousel" data-slide-to="4" class="thumb">
-                                                <img src="http://via.placeholder.com/133x133" alt="product">
-                                            </div>
-                                            <div data-target="#carousel" data-slide-to="5" class="thumb">
-                                                <img src="http://via.placeholder.com/133x133" alt="product">
-                                            </div>
-                                            <div data-target="#carousel" data-slide-to="6" class="thumb">
-                                                <img src="http://via.placeholder.com/133x133" alt="product">
-                                            </div>
-                                            <div data-target="#carousel" data-slide-to="7" class="thumb">
-                                                <img src="http://via.placeholder.com/133x133" alt="product">
-                                            </div>
-                                        </div>
-                                    </div><!--carousel-inne-->
-                                    <a class="left carousel-control" href="#thumbcarousel" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
-                                    <a class="right carousel-control" href="#thumbcarousel" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
-                                </div><!--thumbcarousel-->
-                            </div><!--modal-body-->
-                        </div><!--modal-content-->
-                    </div><!--modal-dialog-->
-                </div><!--madal-->
-            </div>
-            <div class="col-md-5">
-                <!--================= Inside Single  ====================-->
-                <div class="inside-single">
-                    <h4 class="title">@Model.Ten</h4>
-                    <div class="star">
-                        <span>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                        </span>
-                        <a href="#">(4 customer reviews)</a>
-                    </div><!--star-->
-                    <div class="price">$9.99</div>
-                    <div class="description">
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.</p>
-                    </div><!--description-->
-                    <div class="add-to-cart">
-                        <div class="quantity">
-                            <span class="minus"><img src="assets/images/minus.png" alt="minus"></span>
-                            <input value="1" size="5">
-                            <span class="plus"><img src="assets/images/plus.png" alt="plus"></span>
+<body class="single-product">
+    <div class="wrapper">
+        <!--================= Single Product  ====================-->
+        <div class="container" style="padding-top: 100px;">
+            <div class="row">
+                <div class="col-md-6">
+                    <!--================= Single Product Slider  ====================-->
+                    <div class="single-product-slider">
+                        <div class="product-slider-shop owl-carousel owl-theme">
+                            <div class="item"><img src="~/imageproducts/@Model.AnhMoTa" alt="single-product"></div>
                         </div>
-                        <a href="cart.html" class="custom-btn green">add to bag</a>
-                    </div><!--add-to-cart-->
-                    <ul>
-                        <li>Categories:<a href="#">Oil</a></li>
-                        <li>Tags:<a href="#">Oil,</a><a href="#">Organic,</a><a href="#">Health</a></li>
-                        <li>
-                            Share:
-                            <ul class="social-icon">
-                                <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li class="google"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li class="tumblr"><a href="#"><i class="fa fa-tumblr"></i></a></li>
-                                <li class="instagram"><a href="#"><i class="fa fa-instagram"></i></a></li>
-                            </ul><!--social-icon-->
-                        </li>
+                    </div>
+                    <!--================= End of Single Product Slider  ====================-->
+                    <div class="modal fade" id="zoom-modal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                </div>
+                            </div><!--modal-content-->
+                        </div><!--modal-dialog-->
+                    </div><!--modal-->
+                </div>
+                <div class="col-md-6">
+                    <!--================= Inside Single  ====================-->
+                    <div class="inside-single">
+                        <h4 class="title">@Model.Ten</h4>
+                        <div class="price">@Model.DonGia - VND</div>
+                        <div class="star">
+                            <span>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </span>
+                        </div><!--star-->
+                        <div class="description">
+                            <p>@Model.NoiDung</p>
+                        </div><!--description-->
+                        <div class="add-to-cart">
+                            <div class="quantity">
+                                <span class="minus"><img src="~/assets/images/minus.png" alt="minus"></span>
+                                <input value="1" id="sl">
+                                <span class="plus"><img src="~/assets/images/plus.png" alt="plus"></span>
+                            </div>
+                            <div class="quantity">
+                                <select class="form-control" name="size" id="size">
+                                    @foreach (var item in Model.SizeViewModel)
+                                    {
+                                        <option value="@item.SizeNumber">@item.SizeNumber</option>
+                                    }
+                                </select>
+                            </div>
+
+                        </div><!--add-to-cart-->
+                    </div>
+
+                    <!--================= End of Inside Single  ====================-->
+                </div>
+                <a style="margin-left: 100px;" class="custom-btn green" onclick="SaveAddToCart(@Model.Id,@Model.DonGia);">Mua hàng</a>
+                <div class="col-md-12">
+                    <!--================= Tab  ====================-->
+                    <ul class="nav nav-tabs text-center">
+                        <li class="active"><a href="#description" data-toggle="tab" aria-expanded="true">Mô tả</a></li>
                     </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="description">
+                            <p>Giay.store liên tục đón nhận những ý tưởng mới từ cộng đồng để Đồng Sáng Tạo ra những mẫu giày mới. Chúng tôi liên tục cải tiến sản phẩm và quy trình của mình để hướng đến tối đa hóa giá trị cho khách hàng.. </p>
+                            <p>Giay.store liên tục đón nhận những ý tưởng mới từ cộng đồng để Đồng Sáng Tạo ra những mẫu giày mới. Chúng tôi liên tục cải tiến sản phẩm và quy trình của mình để hướng đến tối đa hóa giá trị cho khách hàng.</p>
+                            <ul class="list">
+                                <li class="first">Lí do nên chọn mua hàng ở Giay.store</li>
+                                <li><i class="fa fa-circle"></i>Giao hàng toàn quốc</li>
+                                <li><i class="fa fa-circle"></i>Đổi trả hàng trong vòng 7 ngày</li>
+                                <li><i class="fa fa-circle"></i>Bảo hành 12 tháng </li>
+                            </ul>
+                        </div><!--tab-pane-->
+                    </div>
+                    <!--================= End of Tab  ====================-->
+                    <h2 class="title-head text-center">Sản phẩm cùng loại</h2>
+                    <!--================= Similar Products  ====================-->
+                    <div class="similar-products owl-carousel owl-theme">
+                        @foreach (var item in ViewBag.spliequan)
+                        {
+                            <div class="item">
+                                <div class="product">
+                                    <div class="images text-center">
+                                        <a href="@Url.Action("ChiTietSP","SanPham",new { @Id = item.Id })"><img src="~/imageproducts/@item.AnhMoTa" alt="product5"></a>
+                                        <div class="button-group">
+                                            <a href="@Url.Action("ChiTietSP","SanPham",new { @Id = item.Id })" class="custom-btn pink"><i class="fa fa-search"></i></a>
+                                        </div><!--button-group-->
+                                    </div><!--images-->
+                                    <div class="info-product">
+                                        <a href="@Url.Action("ChiTietSP","SanPham",new { @Id = item.Id })" class="title">@item.Ten</a>
+                                        <span class="price">@item.DonGia</span>
+                                    </div><!--info-product-->
+                                </div><!--product-->
+                            </div>
+                        }
+                    </div>
+                    <!--================= End of Similar Products  ====================-->
                 </div>
-                <!--================= End of Inside Single  ====================-->
-            </div>
-            <div class="col-md-12">
-                <!--================= Tab  ====================-->
-                <ul class="nav nav-tabs text-center">
-                    <li class="active"><a href="#description" data-toggle="tab" aria-expanded="true">Description</a></li>
-                    <li><a href="#additional-info" data-toggle="tab">Additional Info</a></li>
-                    <li><a href="#shipping" data-toggle="tab">Shipping</a></li>
-                    <li><a href="#reviews" data-toggle="tab">Reviews (4)</a></li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane fade in active" id="description">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. </p>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.   Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione.</p>
-                        <ul class="list">
-                            <li class="first">Benefits of Essential Oils:</li>
-                            <li><i class="fa fa-circle"></i>Improve immunity and speed illness recovery</li>
-                            <li><i class="fa fa-circle"></i>Deal with infection (under the care of a professional)</li>
-                            <li><i class="fa fa-circle"></i>Make homemade cleaning or beauty products</li>
-                            <li><i class="fa fa-circle"></i>In recipes like homemade bug spray to avoid outdoor pests naturally</li>
-                        </ul>
-                    </div><!--tab-pane-->
-                    <div class="tab-pane fade" id="additional-info">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. </p>
-                    </div><!--tab-pane-->
-                    <div class="tab-pane fade" id="shipping">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. </p>
-                    </div><!--tab-pane-->
-                    <div class="tab-pane fade" id="reviews">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo. </p>
-                    </div><!--tab-pane-->
-                </div>
-                <!--================= End of Tab  ====================-->
-                <h2 class="title-head text-center">similar products</h2>
-                <!--================= Similar Products  ====================-->
-                <div class="similar-products owl-carousel owl-theme">
-                    <div class="item">
-                        <div class="product">
-                            <div class="images">
-                                <a href="single-product.html"><img src="http://via.placeholder.com/160x210" alt="product2"></a>
-                                <div class="button-group">
-                                    <a href="cart.html" class="custom-btn pink"><i class="fa fa-shopping-bag"></i></a>
-                                    <a href="#" class="custom-btn pink"><i class="fa fa-search"></i></a>
-                                </div><!--button-group-->
-                            </div><!--images-->
-                            <div class="info-product">
-                                <a href="single-product.html" class="title">Detox Zero</a>
-                                <span class="price">$16.99</span>
-                            </div><!--info-product-->
-                        </div><!--product-->
-                    </div>
-                    <div class="item">
-                        <div class="product">
-                            <div class="images">
-                                <a href="single-product.html"><img src="http://via.placeholder.com/160x210" alt="product2"></a>
-                                <div class="button-group">
-                                    <a href="cart.html" class="custom-btn pink"><i class="fa fa-shopping-bag"></i></a>
-                                    <a href="#" class="custom-btn pink"><i class="fa fa-search"></i></a>
-                                </div><!--button-group-->
-                            </div><!--images-->
-                            <div class="info-product">
-                                <a href="single-product.html" class="title">Low Cow - Lite Ice Cream</a>
-                                <span class="price">$9.99</span>
-                            </div><!--info-product-->
-                        </div><!--product-->
-                    </div>
-                    <div class="item">
-                        <div class="product">
-                            <div class="images">
-                                <a href="single-product.html"><img src="http://via.placeholder.com/160x210" alt="product2"></a>
-                                <div class="button-group">
-                                    <a href="cart.html" class="custom-btn pink"><i class="fa fa-shopping-bag"></i></a>
-                                    <a href="#" class="custom-btn pink"><i class="fa fa-search"></i></a>
-                                </div><!--button-group-->
-                            </div><!--images-->
-                            <div class="info-product">
-                                <a href="single-product.html" class="title">Vegan Burger - Veggie Mix</a>
-                                <span class="price">$9.99</span>
-                            </div><!--info-product-->
-                        </div><!--product-->
-                    </div>
-                    <div class="item">
-                        <div class="product">
-                            <div class="images">
-                                <a href="single-product.html"><img src="http://via.placeholder.com/160x210" alt="product2"></a>
-                                <div class="button-group">
-                                    <a href="cart.html" class="custom-btn pink"><i class="fa fa-shopping-bag"></i></a>
-                                    <a href="#" class="custom-btn pink"><i class="fa fa-search"></i></a>
-                                </div><!--button-group-->
-                            </div><!--images-->
-                            <div class="info-product">
-                                <a href="single-product.html" class="title">Organic Girl - Romanie</a>
-                                <span class="price">$4.79</span>
-                            </div><!--info-product-->
-                        </div><!--product-->
-                    </div>
-                    <div class="item">
-                        <div class="product">
-                            <div class="images">
-                                <a href="single-product.html"><img src="http://via.placeholder.com/160x210" alt="product2"></a>
-                                <div class="button-group">
-                                    <a href="cart.html" class="custom-btn pink"><i class="fa fa-shopping-bag"></i></a>
-                                    <a href="#" class="custom-btn pink"><i class="fa fa-search"></i></a>
-                                </div><!--button-group-->
-                            </div><!--images-->
-                            <div class="info-product">
-                                <a href="single-product.html" class="title">Detox Zero</a>
-                                <span class="price">$16.99</span>
-                            </div><!--info-product-->
-                        </div><!--product-->
-                    </div>
-                </div>
-                <!--================= End of Similar Products  ====================-->
             </div>
         </div>
+        <!--================= End of Single Product  ====================-->
     </div>
-</div>
-<!--================= End of Single Product  ====================-->
+</body>
+<script>
+    function SaveAddToCart(id,dongia) {
+        var sl = $('#sl').val();
+        var size = $('#size').val();
+        debugger
+        $.ajax({
+            url: "/SanPham/AddProductsToCart/",
+            dataType: "json",
+            type: "GET",
+            contentType: 'application/json; charset=utf-8',
+            data: { Id: id, Sl: sl, Size: size, Dongia: dongia },
+            success: function (data) {
+                alert("Số lượng còn hiện tại :" + data +"");
+            },
+            error: function (err) {
+                alert(err);
+            }
+        });
+    }
+    
+</script>

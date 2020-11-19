@@ -12,5 +12,6 @@ namespace WebApp.Models
         public string NoiDung { get; set; }
         public string AnhMoTa { get; set; }
         public bool? IsDelete { get; set; }
+        public int? IdLoai { get; set; }
     }
 }

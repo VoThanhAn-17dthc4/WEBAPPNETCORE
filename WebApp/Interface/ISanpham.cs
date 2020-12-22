@@ -8,6 +8,5 @@ namespace WebApp.Interface
 {
     public interface ISanpham : IGenericRepository<SanPham>
     {
-
     }
 }

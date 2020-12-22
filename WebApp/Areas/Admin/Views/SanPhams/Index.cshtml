@@ -36,7 +36,10 @@
                         </div>
                         <div class="col-md-3">
                             <select class="form-control" name="IdLoaiSP" id="IdLoaiSP">
-                                <option value="">Tìm theo loại</option>
+                                @foreach (var item in Comon.loaisp())
+                                {
+                                    <option value="@item.Id">@item.Ten</option>
+                                }
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary" style="width: 8%;border: 1px solid grey;border-left: none;"><i class="fa fa-search"></i></button>
@@ -53,7 +56,6 @@
                                     <th scope="col">Tên sản phẩm</th>
                                     <th scope="col">Đơn giá</th>
                                     <th scope="col">Loại SP</th>
-                                    <th scope="col">Ngày tạo</th>
                                     <th scope="col">Nội dung</th>
                                     <th scope="col">Ảnh mô tả</th>
                                     <th scope="col">Trạng thái</th>
@@ -73,7 +75,6 @@
                                     <th>@item.Ten</th>
                                     <th>@item.DonGia</th>
                                     <th>@Comon.NameByIdLoaiSP(item.IdLoai)</th>
-                                    <th>@item.NgayTao</th>
                                     <th>@item.NoiDung</th>
                                     <th><img src="~/imageproducts/@item.AnhMoTa" style="width:60px; height:60px"></th>
                                     @if (@item.IsDelete == false)

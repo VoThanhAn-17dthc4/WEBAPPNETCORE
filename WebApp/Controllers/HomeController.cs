@@ -27,6 +27,7 @@ namespace WebApp.Controllers
         private readonly ICTHoaDon CTHoaDon = new CTHoaDonRepository();
         private readonly ISanpham Sanpham = new SanPhamRepository();
         private readonly ISize Sizex = new SizeRepository();
+        private readonly ITaiKhoan TaiKhoan = new TaiKhoanRepository();
         public HomeController(ILogger<HomeController> logger, UserManager<UserIdentity> userManager, SignInManager<UserIdentity> signInManager)
         {
             _logger = logger;
@@ -56,7 +57,8 @@ namespace WebApp.Controllers
                         IdGh = item.IdGh,
                         IdSize = item.IdSize,
                         SoLuong = item.SoLuong,
-                        DonGia = item.DonGia
+                        DonGia = item.DonGia,
+                        SLToiDa = Sizex.sltoida(item.IdSp,item.IdSize)
                     }).Where(x => x.IdGh == item.Id).ToList();
                     model.CTGioHangViewModel = details;
                     return View(model);
@@ -123,11 +125,22 @@ namespace WebApp.Controllers
             {
                 var x = CTGioHang.SelectById(item.Id);
                 x.SoLuong = item.SoLuong;
+               
                 var sp = Sizex.findbysizeandid(x.IdSp, x.IdSize);
                 if (sp.SoLuongKho >= item.SoLuong)
                 {
                     CTGioHang.Update(x);
                     CTGioHang.Save();
+                    var ctgh = CTGioHang.SelectAll();
+                    double? tongtien = 0;
+                    foreach(var item1 in ctgh)
+                    {
+                        tongtien += item1.SoLuong * item1.DonGia;
+                    }
+                    var gh = gioHang.SelectById(item.IdGh);
+                    gh.TongTien = tongtien;
+                    gioHang.Update(gh);
+                    gioHang.Save();
                 }  
             }
             return RedirectToAction("GioHang","Home");
@@ -189,10 +202,17 @@ namespace WebApp.Controllers
                     var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                     if (result.Succeeded)
                     {
-                        if(returnUrl == null)
+                        if(TaiKhoan.checkisdelete(model.Email) == true)
                         {
-                            return RedirectToAction("Index","SanPhams", new {Area = "Admin" });
-                        }    
+                            ModelState.AddModelError(string.Empty, "Tai khoan hoac mat khau khong dung!!!.");
+                            return View(model);
+                        }
+                        if (TaiKhoan.checkisdelete(model.Email) == false)
+                        {
+                            HttpContext.Session.SetString("nameadmin",model.Email);
+                            return RedirectToAction("Index", "SanPhams", new { Area = "Admin" });
+                        }
+                        HttpContext.Session.SetString("nameadmin", model.Email);
                         return RedirectToAction(returnUrl);
                     }
                     if (result.IsLockedOut)
@@ -202,7 +222,7 @@ namespace WebApp.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                        ModelState.AddModelError(string.Empty, "Tai khoan hoac mat khau khong dung!!!.");
                         return View(model);
                     }
                 }
@@ -217,6 +237,7 @@ namespace WebApp.Controllers
         {
             return View();
         }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

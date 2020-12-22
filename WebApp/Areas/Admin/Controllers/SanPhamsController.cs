@@ -58,11 +58,10 @@ namespace WebApp.Areas.AdminX.Controllers
                 txtName = txtName == "" ? "~" : Comon.ChuyenThanhKhongDau(txtName);
                 model = model.Where(x => Comon.ChuyenThanhKhongDau(x.Ten).ToString().Contains(txtName.ToString())).ToList();
             }
-            //if (txtTenLoai != null)
-            //{
-            //    txtTenLoai = txtTenLoai == "" ? "~" : Comon.ChuyenThanhKhongDau(txtTenLoai);
-            //    model = model.Where(x => Comon.ChuyenThanhKhongDau(x.TenLoai).ToString().Contains(txtTenLoai.ToString())).ToList();
-            //}
+            if (IdLoaiSP != null)
+            {
+                model = model.Where(x =>x.IdLoai == IdLoaiSP);
+            }
             if (!string.IsNullOrEmpty(txtInfo))
             {
                 model = model.Where(x => Comon.ChuyenThanhKhongDau(x.Ten).Contains(Comon.ChuyenThanhKhongDau(txtInfo)) /*|| Comon.ChuyenThanhKhongDau(x.TenLoai).Contains(txtInfo)*/).ToList();
@@ -82,6 +81,7 @@ namespace WebApp.Areas.AdminX.Controllers
             model.DonGia = item.DonGia;
             model.NoiDung = item.NoiDung;
             model.IsDelete = item.IsDelete;
+            model.IdLoai = item.IdLoai;
             var details = Size.SelectAll().Select(item => new SizeViewModel
             {
                 IdSp = item.IdSp,

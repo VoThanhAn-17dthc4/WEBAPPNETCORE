@@ -24,18 +24,11 @@
                             @Html.TextBoxFor(model => model.TenTaiKhoan, new { @class = "form-control" })
                             @Html.ValidationSummary(true)
                         </div>
-                       
-                        @*<div class="form-group">
-                            <label for="exampleFormControlSelect1">Chọn loại tài khoản</label>
-                            <select class="form-control " data-val="true" data-val-number="The field Loại người dùng must be a number." data-val-required="Bắt buộc nhập" id="IdLoaiNV" name="IdLoaiNV">
-                                <option @(Model.IdLoaiNV == null ? "selected" : "") value="" data-code="">Rỗng</option>
-                                @foreach (var item in Model.listLoaiNV)
-                                {
-                                    <option @(Model.IdLoaiNV == item.Id ? "selected" : "") value="@item.Id">@item.TenLoai</option>
-                                }
-                            </select>
-                        </div>*@
-                       
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Địa Chỉ</label>
+                            @Html.TextBoxFor(model => model.DiaChi, new { @class = "form-control" })
+                            @Html.ValidationSummary(true)
+                        </div>
                     </div>
                 </div>
             </div>
@@ -61,8 +54,8 @@
     </div>
 }
 <script>
-    $('#SDT').change(function () {
-        var mobile = $('#SDT').val();
+    $('#Sdt').change(function () {
+        var mobile = $('#Sdt').val();
         var vnf_regex_mobile = /((09|03|07|08|05)+([0-9]{8})\b)/g;;
         if (mobile !== '') {
             if (vnf_regex_mobile.test(mobile) == false) {
@@ -77,12 +70,11 @@
         }
     });
     $("#Save").click(function () {
-        var tennv = $('#TenNV').val();
+        var tennv = $('#HoVaTen').val();
         var tentk = $('#TenTaiKhoan').val();
         var matkhau = $('#MatKhau').val();
-        var sdt = $('#SDT').val();
-        var cmnd = $('#CMND').val();
-        var loainv = $("#IdLoaiNV").find("option:selected").val();
+        var sdt = $('#DiaChi').val();
+        var cmnd = $('#Sdt').val();
         if (tennv == "") {
             swal({
                 text: "Chưa nhập tên nhân viên!",
@@ -102,14 +94,6 @@
         if (matkhau == "") {
             swal({
                 text: "Chưa nhập mật khẩu!",
-                icon: "warning",
-                button: "Đồng ý",
-            });
-            return false;
-        }
-        if (loainv == "") {
-            swal({
-                text: "Chưa chọn loại nhân viên!",
                 icon: "warning",
                 button: "Đồng ý",
             });

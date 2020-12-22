@@ -99,10 +99,19 @@
 <script type="text/javascript">
     //validation
     $("#Save").click(function () {
+        var detailList = $('.detailList').find('tr').length;
+        if (detailList == 0) {
+            swal({
+                text: "Chưa nhập size và số lượng!",
+                icon: "warning",
+                button: "Đồng ý",
+            });
+            return false;
+        }
         var tensp = $("#Ten").val();
         var dongia = $("#DonGia").val();
         var loaisp = $("#IdLoai").find("option:selected").val();
-        var dvt = $("#IdDVT").find("option:selected").val();
+        var dvt = $("#NoiDung").val();
         if (tensp == "") {
             swal({
                 text: "Chưa nhập tên sản phẩm!",
@@ -129,7 +138,7 @@
         }
         if (dvt == "") {
             swal({
-                text: "Chưa chọn đơn vị tính!",
+                text: "Chưa nhập nội dung!",
                 icon: "warning",
                 button: "Đồng ý",
             });

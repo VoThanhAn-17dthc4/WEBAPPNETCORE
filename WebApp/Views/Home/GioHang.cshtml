@@ -132,10 +132,12 @@
                                 <td class="product-quantity text-center" data-title="Quantity">
                                     <div class="qty mt-5">
                                         <p class="minus bg-dark" onclick="Giam(@i);">-</p>
-                                        <input type="number" class="count" id="soluong_@i" value="@item.SoLuong">
+                                        <input type="number" max="@item.SLToiDa" class="count" id="soluong_@i" value="@item.SoLuong">
                                         <input style="display:none" name="CTGioHangViewModel[@x].SoLuong" id="soluong1_@i" value="@item.SoLuong" />
+                                        <input style="display:none" name="CTGioHangViewModel[@x].DonGia" value="@item.DonGia" />
                                         <input style="display:none" name="CTGioHangViewModel[@x].Id" value="@item.Id" />
-                                        <p class="plus bg-dark" onclick="Tang(@i);">+</p>
+                                        <input style="display:none" name="CTGioHangViewModel[@x].IdGh" value="@item.IdGh" />
+                                        <p class="plus bg-dark" onclick="Tang(@i,@item.SLToiDa);">+</p>
                                     </div>
                                 </td>
                                 <td class="product-price text-center" data-title="Total"><span class="price" id="tongtien_@i"></span></td>
@@ -238,10 +240,18 @@
                 });
             TongTienSP();
         }
-        function Tang(i) {
-        $('#soluong_' + i + '').val(parseInt($('#soluong_' + i + '').val()) + 1);
-        $('#soluong1_' + i + '').val(parseInt($('#soluong1_' + i + '').val()) + 1);
+    function Tang(i, sltoida) {
+        var sl = parseInt($('#soluong_' + i + '').val()) + parseInt(1);
+        debugger
+        if (parseInt(sl) <= parseInt(sltoida)) {
+            $('#soluong_' + i + '').val(parseInt($('#soluong_' + i + '').val()) + 1);
+            $('#soluong1_' + i + '').val(parseInt($('#soluong1_' + i + '').val()) + 1);
             TongTienSP();
+        }
+        else {
+            $('#soluong_' + i + '').val(parseInt(sltoida));
+            $('#soluong1_' + i + '').val(parseInt(sltoida));
+        }
         }
         function Giam(i) {
         $('#soluong_' + i + '').val(parseInt($('#soluong_' + i + '').val()) - 1);

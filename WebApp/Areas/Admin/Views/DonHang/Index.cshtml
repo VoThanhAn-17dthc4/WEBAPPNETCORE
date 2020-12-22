@@ -24,7 +24,7 @@
         <div class="col-lg-12 mb-4">
             <!-- Simple Tables -->
             <div class="card">
-                @using (Html.BeginForm("Index", "HoaDon", FormMethod.Get))
+                @using (Html.BeginForm("Index", "DonHang", FormMethod.Get))
                 {
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                         <div class="col-md-10">
@@ -35,7 +35,7 @@
                         <button type="submit" class="btn btn-primary" style="width: 8%;border: 1px solid grey;border-left: none;"><i class="fa fa-search"></i></button>
                     </div>
                 }
-                @using (Html.BeginForm("Delete", "HoaDon"))
+                @using (Html.BeginForm("Delete", "DonHang"))
                 {
                     <div class="table-responsive">
                         <table class="table table-striped">

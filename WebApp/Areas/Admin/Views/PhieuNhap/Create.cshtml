@@ -1,4 +1,5 @@
 ﻿@model WebApp.Areas.Admin.Models.PhieuNhapViewModel
+@using Microsoft.AspNetCore.Http;
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/ACE_Layout_Admin.cshtml";
@@ -47,14 +48,9 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="col-md-12" style="display:flex">
-                    <div class="col-md-4">
-                        <select class="form-control" id="selectloai">
-                            <option selected>Tìm theo loại</option>
-                            <option value="1">1</option>
-                        </select>
-                    </div>
+
                     <div class="col-md-8">
-                        <input type="text" placeholder="Tìm kiếm nguyên liệu..." id="txtName" class="form-control marg-bot-10">
+                        <input type="text" placeholder="Tìm kiếm sản phẩm..." id="txtName" class="form-control marg-bot-10">
                     </div>
                 </div>
                 <div class="col-md-12" style="padding-top: 10px;padding-bottom:10px">
@@ -91,7 +87,7 @@
                     <div class="col-lg-12">
                         <div class="form-group">
                             <label style="width: 215px; margin-top: 10px;">Nhân viên nhập:</label>
-                            <input type="text" class="form-control" value="ABC" readonly />
+                            <input type="text" class="form-control" value="@Context.Session.GetString("nameadmin")" readonly />
                         </div>
                     </div>
                     <div class="col-lg-12">
@@ -126,150 +122,161 @@
         </div>
     </div>
 }
-    <script>
-        var counter = 0;
-        $(document).ready(function () {
-            $('#listOrderDetail').on('change', '.detail_item_qty', function () {
-                    var $this = $(this);
-                    var id = $this.closest('tr').data('id');
-                    TotalMoney(id);
-                    calcTotalAmount();
-                });
-            $('#listOrderDetail').on('change', '.detail_item_total', function () {
-                    var $this = $(this);
-                    var id = $this.closest('tr').data('id');
-                    TotalMoney(id);
-                    calcTotalAmount();
-                });
-                AutoCompleteTB();
+<script>
+    $("#Save").click(function () {
+        var detailList = $('.detailList').find('tr').length;
+        if (detailList == 0) {
+            swal({
+                text: "Chưa chọn nguyên liệu nhập!",
+                icon: "warning",
+                button: "Đồng ý",
             });
-            function AutoCompleteTB(idloai) {
-            $('#txtName').autocomplete({
-                minLength: 1,
-                source: function (request, response) {
-                    $.ajax({
-                        url: "/Admin/SanPhams/FindProdcuts/",
-                        dataType: "json",
-                        type: "GET",
-                        contentType: 'application/json; charset=utf-8',
-                        data: { name: request.term, Idloai: idloai },
-                        success: function (data) {
-                                response(data);
-                            },
-                        error: function (err) {
-                                alert(err);
-                            }
-                        });
-        },
-                focus: updateTextBox,
-                select: function (e, ui) {
-            debugger
-                    console.log(ui.item);
-            SelectProducts(ui.item.id, ui.item.size);
-        },
-            })
-                .autocomplete('instance')._renderItem = function (ul, item) {
-        return $('<li class="ui-autocomplete-row"></li>')
-            .append('<img src="/imageproducts/' + item.anhMoTa + '" width="40" />&nbsp;&nbsp;&nbsp;Tên SP : ' + item.ten + ' - Đơn giá : ' + item.donGia + ' - Size : ' + item.size + '')
-            .appendTo(ul);
-        function updateTextBox(event, ui) {
-                        $(this).val(ui.item.Id);
             return false;
         }
-    };
-    function updateTextBox(event, ui) {
-        //$('#IdKhachHang').val(ui.item.Id);
-        //$('#dlcustomer').val(ui.item.TenKH);
-        return false;
-    }
-}
-        $("table.order-list").on("click", ".ibtnDel", function (event) {
-            $(this).closest("tr").remove();
-            $('.detailList tr').each(function (index, tr) {
-                $(this).find("span.sn").html(index + 1);
-                $(tr).find('.detail_item_qty').attr('name', 'ListCTPhieuNhap[' + index + '].SoLuong');
-                $(tr).find('.detail_item_price').attr('name', 'ListCTPhieuNhap[' + index + '].DonGia');
-                $(tr).find('.detail_item_id').attr('name', 'ListCTPhieuNhap[' + index + '].IdThanhPham');
     });
-    var count = myTable.querySelectorAll("tr").length;
-    if (count == 1) {
-                $('#Custommer').val("");
-                $('#totalafterdiscount').val("");
-                $('.Excesscash').text("0");
+    var counter = 0;
+    $(document).ready(function () {
+        $('#listOrderDetail').on('change', '.detail_item_qty', function () {
+            var $this = $(this);
+            var id = $this.closest('tr').data('id');
+            TotalMoney(id);
+            calcTotalAmount();
+        });
+        $('#listOrderDetail').on('change', '.detail_item_total', function () {
+            var $this = $(this);
+            var id = $this.closest('tr').data('id');
+            TotalMoney(id);
+            calcTotalAmount();
+        });
+        AutoCompleteTB();
+    });
+    function AutoCompleteTB(idloai) {
+        $('#txtName').autocomplete({
+            minLength: 1,
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Admin/SanPhams/FindProdcuts/",
+                    dataType: "json",
+                    type: "GET",
+                    contentType: 'application/json; charset=utf-8',
+                    data: { name: request.term, Idloai: idloai },
+                    success: function (data) {
+                        response(data);
+                    },
+                    error: function (err) {
+                        alert(err);
+                    }
+                });
+            },
+            focus: updateTextBox,
+            select: function (e, ui) {
+                debugger
+                console.log(ui.item);
+                SelectProducts(ui.item.id, ui.item.size);
+            },
+        })
+            .autocomplete('instance')._renderItem = function (ul, item) {
+                return $('<li class="ui-autocomplete-row"></li>')
+                    .append('<img src="/imageproducts/' + item.anhMoTa + '" width="40" />&nbsp;&nbsp;&nbsp;Tên SP : ' + item.ten + ' - Đơn giá : ' + item.donGia + ' - Size : ' + item.size + '')
+                    .appendTo(ul);
+                function updateTextBox(event, ui) {
+                    $(this).val(ui.item.Id);
+                    return false;
+                }
+            };
+        function updateTextBox(event, ui) {
+            //$('#IdKhachHang').val(ui.item.Id);
+            //$('#dlcustomer').val(ui.item.TenKH);
+            return false;
+        }
     }
-    else {
-        calcTotalAmount();
-    }
-});
-function SelectProducts(id, size) {
-            $.ajax({
-    url: "/Admin/SanPhams/FindProdcutsById/",
-                dataType: "json",
-                contentType: 'application/json; charset=utf-8',
-                data: { Id: id, Size: size },
-                success: function (data) {
-            console.log(data)
-                    var count = myTable.querySelectorAll("tr").length;
-            if (count == null) {
-                count = 0;
-            }
-            debugger
-            var idsize = size.toString() + id.toString();
-            var getid = $("#" + idsize + "").val();
-            if (getid == null) {
-                var html = "";
-                        $.each(data, function (key, item) {
-                    html += '<tr data-id="' + item.sizeid + '"><td id="' + item.sizeid + '"><span class="sn">' + count + '</span></td>';
-                    html += '<td style="display:none;"><input class="detail_item_id form-control input-sm" name="CTPhieuNhapViewModel[' + (count - 1) + '].IdSp"  value="' + id + '"></td>';
-                    html += '<td><p type="text">' + item.ten + '</p></td>';
-                    html += '<td id="' + size + '"><p class="">' + size + '</p></td>';
-                    html += '<td><p  class="detail_item_price" type="text">' + item.donGia + '</p></td>';
-                    html += '<td style="display:none;"><input id="Price_' + idsize + '" class="detail_item_price form-control input-sm" type="text" name="CTPhieuNhapViewModel[' + (count - 1) + '].DonGia" value="' + item.donGia + '"></td>';
-                    html += '<td><input id="Count_' + idsize + '" class="detail_item_qty form-control input-sm" type="number" min="1" name="CTPhieuNhapViewModel[' + (count - 1) + '].SoLuong" value="1"></td>';
-                    html += '<td style="display:none;"><input type="text" name="CTPhieuNhapViewModel[' + (count - 1) + '].IdSize" value="' + size + '"></td>';
-                    html += '<td><p id="Total_' + idsize + '" class="detail_item_total"></p></td>';
-                    html += '<td style="text-align:center;"><i class="ibtnDel fa fa-close" style="font-size:35px;color:red;"></i></td></tr>';
-                            $("table.order-list").append(html);
+    $("table.order-list").on("click", ".ibtnDel", function (event) {
+        $(this).closest("tr").remove();
+        $('.detailList tr').each(function (index, tr) {
+            $(this).find("span.sn").html(index + 1);
+            $(tr).find('.detail_item_qty').attr('name', 'ListCTPhieuNhap[' + index + '].SoLuong');
+            $(tr).find('.detail_item_price').attr('name', 'ListCTPhieuNhap[' + index + '].DonGia');
+            $(tr).find('.detail_item_id').attr('name', 'ListCTPhieuNhap[' + index + '].IdThanhPham');
+        });
+        var count = myTable.querySelectorAll("tr").length;
+        if (count == 1) {
+            $('#Custommer').val("");
+            $('#totalafterdiscount').val("");
+            $('.Excesscash').text("0");
+        }
+        else {
+            calcTotalAmount();
+        }
+    });
+    function SelectProducts(id, size) {
+        $.ajax({
+            url: "/Admin/SanPhams/FindProdcutsById/",
+            dataType: "json",
+            contentType: 'application/json; charset=utf-8',
+            data: { Id: id, Size: size },
+            success: function (data) {
+                console.log(data)
+                var count = myTable.querySelectorAll("tr").length;
+                if (count == null) {
+                    count = 0;
+                }
+                debugger
+                var idsize = size.toString() + id.toString();
+                var getid = $("#" + idsize + "").val();
+                if (getid == null) {
+                    var html = "";
+                    $.each(data, function (key, item) {
+                        html += '<tr data-id="' + item.sizeid + '"><td id="' + item.sizeid + '"><span class="sn">' + count + '</span></td>';
+                        html += '<td style="display:none;"><input class="detail_item_id form-control input-sm" name="CTPhieuNhapViewModel[' + (count - 1) + '].IdSp"  value="' + id + '"></td>';
+                        html += '<td><p type="text">' + item.ten + '</p></td>';
+                        html += '<td id="' + size + '"><p class="">' + size + '</p></td>';
+                        html += '<td><p  class="detail_item_price" type="text">' + item.donGia + '</p></td>';
+                        html += '<td style="display:none;"><input id="Price_' + idsize + '" class="detail_item_price form-control input-sm" type="text" name="CTPhieuNhapViewModel[' + (count - 1) + '].DonGia" value="' + item.donGia + '"></td>';
+                        html += '<td><input id="Count_' + idsize + '" class="detail_item_qty form-control input-sm" type="number" min="1" name="CTPhieuNhapViewModel[' + (count - 1) + '].SoLuong" value="1"></td>';
+                        html += '<td style="display:none;"><input type="text" name="CTPhieuNhapViewModel[' + (count - 1) + '].IdSize" value="' + size + '"></td>';
+                        html += '<td><p id="Total_' + idsize + '" class="detail_item_total"></p></td>';
+                        html += '<td style="text-align:center;"><i class="ibtnDel fa fa-close" style="font-size:35px;color:red;"></i></td></tr>';
+                        $("table.order-list").append(html);
+                        TotalMoney(idsize);
+                        calcTotalAmount();
+                        counter++;
+
+                    });
+                }
+                else {
+                    var num1 = $("#Count_" + idsize + "").val();
+                    var answer = parseInt(num1) + 1;
+                    $("#Count_" + idsize + "").val(answer);
                     TotalMoney(idsize);
                     calcTotalAmount();
-                    counter++;
+                }
 
-                });
-                    }
-                    else {
-    var num1 = $("#Count_" + idsize + "").val();
-    var answer = parseInt(num1) + 1;
-                        $("#Count_" + idsize + "").val(answer);
-    TotalMoney(idsize);
-    calcTotalAmount();
-}
+            },
+            error: function (xhr) {
+                console.log(xhr);
+            }
+        });
+    }
+    function TotalMoney(id) {
+        var num1 = $("#Count_" + id + "").val();
+        var num2 = $("table.order-list #Price_" + id + "").val();
+        var answer = parseInt(num1) * parseInt(num2);
+        $("table.order-list #Total_" + id + "").text((answer));
+        $("table.order-list #Total_" + id + "").val(answer);
+    }
+    function calcTotalAmount() {
+        var total = 0;
+        var total1 = 0;
+        var selector = '.detailList tr';
+        $('table > tbody  > tr').each(function (index, elem) {
+            if ($(elem).find('.detail_item_total').text() != '') {
+                console.log(total);
+                console.log(elem);
+                total = total + parseFloat($(elem).find('.detail_item_total').val());
+                $("#totalafterdiscount").val(total);
+                $('input[name="TongTien"]').val(total);
 
-                },
-                error: function (xhr) {
-    console.log(xhr);
-}
-            });
-        }
-        function TotalMoney(id) {
-    var num1 = $("#Count_" + id + "").val();
-    var num2 = $("table.order-list #Price_" + id + "").val();
-    var answer = parseInt(num1) * parseInt(num2);
-            $("table.order-list #Total_" + id + "").text((answer));
-            $("table.order-list #Total_" + id + "").val(answer);
-}
-function calcTotalAmount() {
-    var total = 0;
-    var total1 = 0;
-    var selector = '.detailList tr';
-            $('table > tbody  > tr').each(function (index, elem) {
-        if ($(elem).find('.detail_item_total').text() != '') {
-    console.log(total);
-    console.log(elem);
-    total = total + parseFloat($(elem).find('.detail_item_total').val());
-                    $("#totalafterdiscount").val(total);
-                    $('input[name="TongTien"]').val(total);
-
-}
-            });
-        }
-    </script>
+            }
+        });
+    }
+</script>

@@ -44,20 +44,28 @@
                             <p>@Model.NoiDung</p>
                         </div><!--description-->
                         <div class="add-to-cart">
-                            <div class="quantity">
-                                <span class="minus"><img src="~/assets/images/minus.png" alt="minus"></span>
-                                <input value="1" id="sl">
-                                <span class="plus"><img src="~/assets/images/plus.png" alt="plus"></span>
+                            <div class="wrapper" style="display: grid;">
+                                <div class="item1">
+                                    <div class="quantity">
+                                        <span>Số lượng :</span>
+                                        <span class="minus"><img src="~/assets/images/minus.png" alt="minus"></span>
+                                        <input value="1" id="sl">
+                                        <span class="plus"><img src="~/assets/images/plus.png" alt="plus"></span>
+                                    </div>
+                                </div>
+                                <div class="item2">
+                                    <div class="quantity">
+                                        <span>Size :</span>
+                                        <select class="" name="size" id="size" style="border-color:aqua;width: 50px;">
+                                            @foreach (var item in Model.SizeViewModel)
+                                            {
+                                                <option value="@item.SizeNumber">@item.SizeNumber</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="quantity">
-                                <select class="form-control" name="size" id="size">
-                                    @foreach (var item in Model.SizeViewModel)
-                                    {
-                                        <option value="@item.SizeNumber">@item.SizeNumber</option>
-                                    }
-                                </select>
-                            </div>
-
+                           
                         </div><!--add-to-cart-->
                     </div>
 
@@ -114,7 +122,6 @@
     function SaveAddToCart(id,dongia) {
         var sl = $('#sl').val();
         var size = $('#size').val();
-        debugger
         $.ajax({
             url: "/SanPham/AddProductsToCart/",
             dataType: "json",
@@ -122,10 +129,22 @@
             contentType: 'application/json; charset=utf-8',
             data: { Id: id, Sl: sl, Size: size, Dongia: dongia },
             success: function (data) {
-                alert("Số lượng còn hiện tại :" + data +"");
+                debugger
+                if (data != null) {
+                    if (data == "ok") {
+                        alert("Thêm thành công!!!");
+                    }
+                    else {
+                        alert("Số lượng còn hiện tại :" + data + "");
+                    }
+                    
+                }
             },
             error: function (err) {
-                alert(err);
+                console.log(err)
+                var pageURL = window.location.origin;
+                window.location = pageURL+"/TaiKhoan/DangNhap";
+
             }
         });
     }

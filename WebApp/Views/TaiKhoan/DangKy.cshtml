@@ -23,14 +23,14 @@
             <div class="signup-content">
                 <div class="signup-form">
                     <h2 class="form-title">Đăng ký</h2>
-                    <form method="POST" class="register-form" id="register-form">
+                    <form method="POST" class="register-form">
                         <div class="form-group">
                             <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
                             <input type="text" name="HoVaTen" id="name" placeholder="Họ và Tên" />
                         </div>
                         <div class="form-group">
                             <label for="email"><i class="zmdi zmdi-email"></i></label>
-                            <input type="email" name="TenTaiKhoan" id="email" placeholder="Tên Đăng Nhập" />
+                            <input type="text" name="TenTaiKhoan" id="email" placeholder="Tên Đăng Nhập" />
                         </div>
                         <div class="form-group">
                             <label for="pass"><i class="zmdi zmdi-lock"></i></label>
@@ -38,11 +38,11 @@
                         </div>
                         <div class="form-group">
                             <label for="re-pass"><i class="zmdi zmdi-gps-dot"></i></label>
-                            <input type="password" name="DiaChi" id="re_pass" placeholder="Địa chỉ nhận hàng" />
+                            <input type="text" name="DiaChi" id="re_pass" placeholder="Địa chỉ nhận hàng" />
                         </div>
                         <div class="form-group">
                             <label for="re-pass"><i class="zmdi zmdi-phone"></i></label>
-                            <input type="password" name="Sdt" id="re_pass" placeholder="Số điện thoại" />
+                            <input type="text" name="Sdt" id="sdt" placeholder="Số điện thoại" />
                         </div>
 
                         <div class="form-group form-button">
@@ -57,6 +57,56 @@
         </div>
     </section>
 </div>
-
 <script src="~/Login/vendor/jquery/jquery.min.js"></script>
 <script src="~/Login/js/main.js"></script>
+<script>
+    $("#signup").click(function () {
+        var name = $("#name").val();
+        var email = $("#email").val();
+        var pass = $("#pass").val();
+        var re_pass = $("#re_pass").val();
+        var sdt = $("#sdt").val();
+        debugger
+        if (name == "") {
+            swal({
+                text: "Không dược bỏ trống!",
+                icon: "warning",
+                button: "Đồng ý",
+            });
+            return false;
+        }
+        if (email == "") {
+            swal({
+                text: "Không dược bỏ trống!",
+                icon: "warning",
+                button: "Đồng ý",
+            });
+            return false;
+        }
+        if (pass == "") {
+            swal({
+                text: "Không dược bỏ trống!",
+                icon: "warning",
+                button: "Đồng ý",
+            });
+            return false;
+        }
+        if (re_pass == "") {
+            swal({
+                text: "Không dược bỏ trống!",
+                icon: "warning",
+                button: "Đồng ý",
+            });
+            return false;
+        }
+        if (sdt == "") {
+            swal({
+                text: "Không dược bỏ trống!",
+                icon: "warning",
+                button: "Đồng ý",
+            });
+            return false;
+        }
+    });
+</script>
+

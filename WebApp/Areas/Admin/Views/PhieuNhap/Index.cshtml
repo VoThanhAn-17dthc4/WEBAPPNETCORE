@@ -3,6 +3,7 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/ACE_Layout_Admin.cshtml";
 }
+@using WebApp.Helper
 <div class="container-fluid" id="container-wrapper">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <div style="display:flex">
@@ -64,7 +65,7 @@
                                     <th>@item.TieuDe</th>
                                     <th>@item.TongTien</th>
                                     <th>@item.NgayTao</th>
-                                    <th>@item.IdTk</th>
+                                    <th>@Comon.NameByIdTK(item.IdTk)</th>
                                     <th>@item.IdNcc</th>
                                     @if (@item.IsDelete == false)
                                     {

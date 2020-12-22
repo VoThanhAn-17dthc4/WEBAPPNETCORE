@@ -459,3 +459,9 @@ C:\Users\Admin\source\repos\WebApp\WEBAPPNETCORE\WebApp\obj\Debug\netcoreapp3.1\
 C:\Users\Admin\source\repos\WebApp\WEBAPPNETCORE\WebApp\obj\Debug\netcoreapp3.1\WebApp.pdb
 C:\Users\Admin\source\repos\WebApp\WEBAPPNETCORE\WebApp\obj\Debug\netcoreapp3.1\WebApp.genruntimeconfig.cache
 C:\Users\Admin\source\repos\WebApp\WEBAPPNETCORE\WebApp\obj\Debug\netcoreapp3.1\WebApp.csprojAssemblyReference.cache
+C:\Users\Admin\source\repos\WebApp\WEBAPPNETCORE\WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\TaiKhoan\Edit.cshtml.g.cs
+C:\Users\Admin\source\repos\WebApp\WEBAPPNETCORE\WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\KhachHang\Index.cshtml.g.cs
+C:\Users\Admin\source\repos\WebApp\WEBAPPNETCORE\WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\TrangChu\Index.cshtml.g.cs
+C:\Users\Admin\source\repos\WebApp\WEBAPPNETCORE\WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\SaleReport\SPBanChay.cshtml.g.cs
+C:\Users\Admin\source\repos\WebApp\WEBAPPNETCORE\WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\SaleReport\SPBanCham.cshtml.g.cs
+C:\Users\Admin\source\repos\WebApp\WEBAPPNETCORE\WebApp\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\SaleReport\DoanhThuTheoThang.cshtml.g.cs

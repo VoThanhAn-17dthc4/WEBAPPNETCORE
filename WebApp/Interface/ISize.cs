@@ -9,5 +9,6 @@ namespace WebApp.Interface
     public interface ISize:IGenericRepository<Size>
     {
         Size findbysizeandid(int? id, int? size);
+        int? sltoida(int? id,int? size);
     }
 }

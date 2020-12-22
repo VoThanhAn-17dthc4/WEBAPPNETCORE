@@ -13,5 +13,6 @@ namespace WebApp.ViewModels
         public int? IdSize { get; set; }
         public int? SoLuong { get; set; }
         public double? DonGia { get; set; }
+        public int? SLToiDa { get; set; }
     }
 }

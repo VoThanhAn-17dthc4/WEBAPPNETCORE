@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/ACE_Layout.cshtml";
     int i = 1;
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
     .donhang {
         width: 90%;
@@ -43,7 +44,7 @@
                         <th>
                             @if (@item.TrangThaiDonHang == "Chuaduyet")
                             {
-                                <button class="btn btn-warning" title="Hủy đơn hàng" style="margin:-2px" name="IdDelete" type="submit" value="@item.Id" onclick="return ConfirmDelete()"> <i class="fas fa-check"></i></button>
+                                <button class="btn btn-warning" title="Hủy đơn hàng" style="margin:-2px" name="IdDelete" type="submit" value="@item.Id" onclick="return ConfirmDelete()"> <i class="fa fa-trash-o"></i></button>
                             }
                         </th>
                         <th>@i</th>

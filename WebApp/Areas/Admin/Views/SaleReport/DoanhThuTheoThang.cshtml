@@ -1,0 +1,116 @@
+﻿
+@model IEnumerable<WebApp.Models.DoanhThuTheoTungThang>
+@{
+    ViewData["Title"] = "DoanhThuTheoThang";
+    Layout = "~/Views/Shared/ACE_Layout_Admin.cshtml";
+    var i = 1;
+}
+
+<div class="container-fluid" id="container-wrapper">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Báo cáo doanh thu theo tháng</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./">Trang chủ</a></li>
+            <li class="breadcrumb-item">Báo cáo</li>
+            <li class="breadcrumb-item active" aria-current="page">Doanh thu theo tháng</li>
+        </ol>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 mb-4">
+            <!-- Simple Tables -->
+            <div class="card">
+                @using (Html.BeginForm("DoanhThuTheoThang", "SaleReport", FormMethod.Get))
+                {
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <div class="col-md-4">
+                            <select class="form-control " data-val="true" data-val-number="The field Loại người dùng must be a number." data-val-required="Bắt buộc nhập" id="s_year" name="s_year">
+                                @foreach (var item in ViewBag.year)
+                                {
+                                    <option @(ViewBag.isyear == item.Value ? "selected" : "") value="@item.Value">Năm @item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-8">
+                            <button type="submit" class="btn btn-primary" style="width: 12%;border: 1px solid grey;border-left: none;"><i class="fa fa-search"></i></button>
+                           
+                        </div>
+                    </div>
+                }
+                <div class="table-responsive">
+                    <div class="grid-mvc" data-lang="en" data-gridname="" data-selectable="true" data-multiplefilters="false">
+                        <div class="grid-wrap">
+                            <table class="table table-striped grid-table" id="table-grid">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="grid-header">
+                                            <div class="grid-header-title">
+                                                <span>STT</span>
+                                            </div>
+                                        </th>
+                                        <th class="grid-header">
+                                            <div class="grid-header-title">
+                                                <span>Tháng</span>
+                                            </div>
+                                        </th>
+                                        <th class="grid-header">
+                                            <div class="grid-header-title">
+                                                <span>Tổng tiền thu S0</span>
+                                            </div>
+                                        </th>
+                                        <th class="grid-header">
+                                            <div class="grid-header-title">
+                                                <span>Tổng tiền chi S1</span>
+                                            </div>
+                                        </th>
+                                        <th class="grid-header">
+                                            <div class="grid-header-title">
+                                                <span>Tiền lãi (S0-S1)</span>
+                                            </div>
+                                        </th>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr class="grid-row ">
+                                            <td class="grid-cell" data-name="">@i</td>
+                                            <td class="grid-cell" data-name="">
+                                                <span>Tháng @item.Thang</span>
+                                            </td>
+                                            <td class="grid-cell money1" data-name="GhiChu">@item.Tongthu</td>
+                                            <td class="grid-cell money1" data-name="TongTien">@item.Tongchi</td>
+                                            <td class="grid-cell money1" data-name="TenKH">@item.Loinhuan</td>
+                                        </tr>
+                                        i++;
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>Tổng tiền :</td>
+                                        <td class="money1" style="color:blue">@ViewBag.tongtien</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Row-->
+</div>
+
+
+<script>
+    function openpoupmy(value) {
+        debugger
+        var sd = $("#s_year").val();
+        newwindow = window.open('/CMS_Sale/SaleReport/ExportToExcel?name=doanhthutheothang&s_year=' + sd + '&ExportExcel=' + value + '', 'print', 'height=500,width=500');
+
+        setTimeout(function () {
+        }, 500);
+    }
+
+</script>

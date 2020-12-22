@@ -115,7 +115,15 @@ namespace WebApp.Controllers
                 return RedirectToAction("Index","Home");
             }    
         }
-
+        [HttpPost]
+        public ActionResult DangXuat()
+        {
+            HttpContext.Session.Remove("username");
+            HttpContext.Session.Remove("diachi");
+            HttpContext.Session.Remove("sdt");
+            HttpContext.Session.Remove("id");
+            return RedirectToAction("Index", "Home"); 
+        }
         // GET: TaiKhoanController/Delete/5
         public ActionResult Delete(int id)
         {

@@ -16,5 +16,6 @@ namespace WebApp.Areas.Admin.Models
         public string SDT { get; set; }
         public string DiaChi { get; set; }
         public List<CTHoaDonViewModel> CTHoaDonViewModel { set; get; }
+        public int? Ngay { set; get; }
     }
 }

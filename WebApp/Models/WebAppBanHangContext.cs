@@ -34,7 +34,10 @@ namespace WebApp.Models
         public virtual DbSet<TaiKhoan> TaiKhoan { get; set; }
         public virtual DbSet<Giohang> Giohang { get; set; }
         public virtual DbSet<CtgioHang> CtgioHang { get; set; }
-
+        public virtual DbSet<DTTT> DTTT { get; set; }
+        public virtual DbSet<TopSanPhamBanCham> TopSanPhamBanCham { get; set; }
+        public virtual DbSet<TopSanPhamBanChay> TopSanPhamBanChay { get; set; }
+        public virtual DbSet<DoanhThuTheoTungThang> DoanhThuTheoTungThang { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)

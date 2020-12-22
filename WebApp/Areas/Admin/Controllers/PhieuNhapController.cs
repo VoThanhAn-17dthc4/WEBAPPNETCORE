@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Areas.Admin.Models;
+using WebApp.Helper;
 using WebApp.Interface;
 using WebApp.Models;
 using WebApp.Repository;
@@ -18,6 +20,7 @@ namespace WebApp.Areas.Admin.Controllers
         private readonly IPhieuNhap PhieuNhap = new PhieuNhapRepository();
         private readonly ICTPhieuNhap CTPhieuNhap = new CTPhieuNhapRepository();
         private readonly ISize Size = new SizeRepository();
+        private readonly ITaiKhoan TaiKhoan = new TaiKhoanRepository();
         public IActionResult Index(string id)
         {
             IEnumerable<PhieuNhapViewModel> model = PhieuNhap.SelectAll().Select(
@@ -69,9 +72,10 @@ namespace WebApp.Areas.Admin.Controllers
         {
             try
             {
+                var idtk = HttpContext.Session.GetString("nameadmin");
                 var phieunhap = new PhieuNhap();
                 phieunhap.IdNcc = model.IdNcc;
-                phieunhap.IdTk = 1;
+                phieunhap.IdTk = Comon.IdByNameTK(idtk);
                 phieunhap.IsDelete = false;
                 phieunhap.NgayTao = DateTime.Now;
                 phieunhap.TieuDe = model.TieuDe;

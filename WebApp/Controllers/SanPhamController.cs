@@ -87,16 +87,12 @@ namespace WebApp.Controllers
             ViewBag.spliequan = splienquan;
             return View(model);
         }
-
+        [HttpGet]
         // GET: SanPhamController/Create
         public ActionResult AddProductsToCart(int? Id,int? Sl,int? Size,double? DonGia)
         {
             var idtk = HttpContext.Session.GetInt32("id");
-            if (idtk == null)
-            {
-                return RedirectToAction("DangNhap", "TaiKhoan");
-            }
-            else
+            if(idtk != null)
             {
                 var sp = Sizex.findbysizeandid(Id, Size);
                 if(sp.SoLuongKho >= Sl)
@@ -105,8 +101,8 @@ namespace WebApp.Controllers
                     if (kq == null)
                     {
                         var item = new Giohang();
-                        item.IdTk = 01;
-                        item.TongTien = 3000;
+                        item.IdTk = idtk;
+                        item.TongTien = Sl*DonGia;
                         GioHang.Insert(item);
                         GioHang.Save();
                         var itemx = new CtgioHang();
@@ -134,7 +130,7 @@ namespace WebApp.Controllers
                         }
                         else
                         {
-                            kq.TongTien = kq.TongTien + Sl * DonGia;
+                            kq.TongTien = kq.TongTien + (Sl * DonGia);
                             GioHang.Update(kq);
                             GioHang.Save();
                             var ctghx = CTGioHang.FindByIdSP(Size, Id, kq.Id);
@@ -146,13 +142,14 @@ namespace WebApp.Controllers
                     sp.SoLuongKho = sp.SoLuongKho - Sl;
                     Sizex.Update(sp);
                     Sizex.Save();
+                    return Json("ok");
                 }    
                 else
                 {
                     return Json(sp.SoLuongKho.ToString());
                 }    
-            }    
-            return View();
+            }
+            return RedirectToAction("DangNhap", "TaiKhoan");
         }
 
     }

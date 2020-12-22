@@ -28,76 +28,39 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 $.ajax({
-    url: "/Home/PieChartReal",
+    url: "/Admin/TrangChu/BarchatReal",
     dataType: "json",
     type: "GET",
     contentType: 'application/json; charset=utf-8',
     success: function (data) {
-        var oilCanvas = document.getElementById("oilChart");
-        Chart.defaults.global.defaultFontFamily = "Lato";
-        Chart.defaults.global.defaultFontSize = 18;
-        var labels = data.map(function (e) {
-            return e.Ten;
-        });
-        var datas = data.map(function (e) {
-            return e.Tongsl;
-        });
-        var oilData = {
-            labels: labels,
+        
+        var value = data[0].doanhthu;
+        for (var i = 1; i < data.length; i++) {
+            if (value < data[i].doanhthu) {
 
-            datasets: [
-                {
-                    data: datas,
-                    backgroundColor: [
-                        "#FF6384",
-                        "#FFFACD",
-                        "#FF00FF",
-                        "#8463FF",
-                        "#FFC0CB"
-                    ]
-                }]
-        };
-        var pieChart = new Chart(oilCanvas, {
-            type: 'pie',
-            data: oilData
-        });
-    }
-});
-
-
-// Bar Chart Example
-$.ajax({
-    url: "/Home/BarchatReal",
-    dataType: "json",
-    type: "GET",
-    contentType: 'application/json; charset=utf-8',
-    success: function (data) {
-        var value = data[0].DOANHTHU;
-        for (var i = 1; i < data.length; i++)
-        {
-            if (value < data[i].DOANHTHU)
-            {
-               
-                value = data[i].DOANHTHU;
+                value = data[i].doanhthu;
             }
         }
         var labels = data.map(function (e) {
-            return "Th." + e.THANG;
+            return "Th." + e.thang;
         });
-        var data = data.map(function (e) {
-            return e.DOANHTHU;
+        debugger
+        var data1 = data.map(function (e) {
+            return e.doanhthu;
         });;
+        console.log(data);
         var ctx = document.getElementById("myBarChart");
+        debugger
         var myBarChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels:labels,
+                labels: labels,
                 datasets: [{
                     label: "Tổng tiền",
                     backgroundColor: "#4e73df",
                     hoverBackgroundColor: "#2e59d9",
                     borderColor: "#4e73df",
-                    data: data,
+                    data: data1,
                 }],
             },
             options: {
@@ -169,7 +132,9 @@ $.ajax({
         });
     },
     error: function (err) {
-        alert(err);
+        alert("a");
     }
 });
+
+
 

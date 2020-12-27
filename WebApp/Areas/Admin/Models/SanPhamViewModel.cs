@@ -17,6 +17,7 @@ namespace WebApp.Areas.Admin.Models
         public string AnhMoTa { get; set; }
         public bool? IsDelete { get; set; }
         public IFormFile ProfileImage { get; set; }
+        public int? IdLoai { get; set; }
         public List<SizeViewModel> SizeViewModel { get; set; }
     }
 }

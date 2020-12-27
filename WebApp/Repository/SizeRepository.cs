@@ -14,5 +14,11 @@ namespace WebApp.Repository
             var sizeid = _db.Size.SingleOrDefault(x => x.IdSp == id && x.SizeNumber == size);
             return sizeid;
         }
+
+        public int? sltoida(int? id, int? size)
+        {
+            var sizeid = _db.Size.SingleOrDefault(x => x.IdSp == id && x.SizeNumber == size);
+            return sizeid.SoLuongKho;
+        }
     }
 }

@@ -1,0 +1,121 @@
+﻿@model WebApp.Areas.Admin.Models.TaiKhoanViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/ACE_Layout_Admin.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "TaiKhoan", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="container-fluid" id="container-wrapper">
+        <div class="row">
+            <div class="col-lg-6">
+                <!-- Form Basic -->
+                <div class="card mb-4">
+                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Cập nhật nhân viên</h6>
+                    </div>
+                    <div class="card-body" style="margin-top:-13px">
+                        <div class="form-group">
+                            <label>Tên nhân viên</label>
+                            @Html.TextBoxFor(model => model.HoVaTen, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Tên Tài Khoản</label>
+                            @Html.TextBoxFor(model => model.TenTaiKhoan, new { @class = "form-control" })
+                            @Html.ValidationSummary(true)
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Địa Chỉ</label>
+                            @Html.TextBoxFor(model => model.DiaChi, new { @class = "form-control" })
+                            @Html.ValidationSummary(true)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <!-- Form Basic -->
+                <div class="card mb-4">
+                    <div class="card-body" style="margin-top:-13px">
+                        <div class="form-group">
+                            <label>Mật khẩu</label>
+                            @Html.TextBoxFor(model => model.MatKhau, new { @class = "form-control", Type = "password" })
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Số điện thoại</label>
+                            @Html.TextBoxFor(model => model.Sdt, new { @class = "form-control" })
+                        </div>
+                        <button class="btn btn-mini btn-primary" id="Save" type="submit" name="Submit">
+                            <i class="ace-icon fa fa-save"></i> Lưu
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    $('#Sdt').change(function () {
+        var mobile = $('#Sdt').val();
+        var vnf_regex_mobile = /((09|03|07|08|05)+([0-9]{8})\b)/g;;
+        if (mobile !== '') {
+            if (vnf_regex_mobile.test(mobile) == false) {
+                swal({
+                    text: "Số điện thoại không hợp lệ!",
+                    icon: "warning",
+                    button: "Đồng ý",
+                });
+                $(this).val("");
+                return false;
+            }
+        }
+    });
+    $("#Save").click(function () {
+        var tennv = $('#HoVaTen').val();
+        var tentk = $('#TenTaiKhoan').val();
+        var matkhau = $('#MatKhau').val();
+        var sdt = $('#DiaChi').val();
+        var cmnd = $('#Sdt').val();
+        if (tennv == "") {
+            swal({
+                text: "Chưa nhập tên nhân viên!",
+                icon: "warning",
+                button: "Đồng ý",
+            });
+            return false;
+        }
+        if (tentk == "") {
+            swal({
+                text: "Chưa nhập tên tài khoản!",
+                icon: "warning",
+                button: "Đồng ý",
+            });
+            return false;
+        }
+        if (matkhau == "") {
+            swal({
+                text: "Chưa nhập mật khẩu!",
+                icon: "warning",
+                button: "Đồng ý",
+            });
+            return false;
+        }
+        if (cmnd == "") {
+            swal({
+                text: "Chưa nhập số CMND!",
+                icon: "warning",
+                button: "Đồng ý",
+            });
+            return false;
+        }
+        if (sdt == "") {
+            swal({
+                text: "Chưa nhập số điện thoại!",
+                icon: "warning",
+                button: "Đồng ý",
+            });
+            return false;
+        }
+
+    });
+</script>
+

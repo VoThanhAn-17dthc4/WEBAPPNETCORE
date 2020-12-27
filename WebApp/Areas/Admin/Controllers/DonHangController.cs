@@ -19,7 +19,7 @@ namespace WebApp.Areas.Admin.Controllers
         private readonly IHoaDon HoaDon = new HoaDonRepository();
         private readonly ICTHoaDon CTHoaDon = new CTHoaDonRepository();
         // GET: DonHangController
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string id)
         {
             IEnumerable<HoaDonViewModel> model = HoaDon.SelectAll().Select(
                   item => new HoaDonViewModel
@@ -31,6 +31,10 @@ namespace WebApp.Areas.Admin.Controllers
                       IdKh = item.IdKh,
                       TrangThaiDonHang = item.TrangThaiDonHang
                   }).OrderByDescending(x => x.NgayTao);
+            if (id != null)
+            {
+                model = model.Where(x => x.Id.ToString().Contains(id.ToString())).ToList();
+            }
             return View(model);
         }
 

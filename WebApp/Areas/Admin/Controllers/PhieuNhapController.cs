@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.Areas.Admin.Models;
+using WebApp.Helper;
 using WebApp.Interface;
 using WebApp.Models;
 using WebApp.Repository;
@@ -18,7 +20,8 @@ namespace WebApp.Areas.Admin.Controllers
         private readonly IPhieuNhap PhieuNhap = new PhieuNhapRepository();
         private readonly ICTPhieuNhap CTPhieuNhap = new CTPhieuNhapRepository();
         private readonly ISize Size = new SizeRepository();
-        public IActionResult Index()
+        private readonly ITaiKhoan TaiKhoan = new TaiKhoanRepository();
+        public IActionResult Index(string id)
         {
             IEnumerable<PhieuNhapViewModel> model = PhieuNhap.SelectAll().Select(
                 item => new PhieuNhapViewModel
@@ -31,6 +34,10 @@ namespace WebApp.Areas.Admin.Controllers
                     TongTien = item.TongTien,
                     TieuDe = item.TieuDe
                 }).OrderByDescending(x => x.NgayTao).Where(x => x.IsDelete != true);
+            if (id != null)
+            {
+                model = model.Where(x => x.Id.ToString().Contains(id.ToString())).ToList();
+            }
             return View(model);
         }
         public IActionResult Details(int? id)
@@ -65,9 +72,10 @@ namespace WebApp.Areas.Admin.Controllers
         {
             try
             {
+                var idtk = HttpContext.Session.GetString("nameadmin");
                 var phieunhap = new PhieuNhap();
                 phieunhap.IdNcc = model.IdNcc;
-                phieunhap.IdTk = 1;
+                phieunhap.IdTk = Comon.IdByNameTK(idtk);
                 phieunhap.IsDelete = false;
                 phieunhap.NgayTao = DateTime.Now;
                 phieunhap.TieuDe = model.TieuDe;

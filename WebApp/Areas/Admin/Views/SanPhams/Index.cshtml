@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<WebApp.Areas.Admin.Models.SanPhamViewModel>
+@using WebApp.Helper;
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/ACE_Layout_Admin.cshtml";
@@ -28,30 +29,20 @@
                 @using (Html.BeginForm("Index", "SanPhams", FormMethod.Get))
                 {
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <div class="col-md-5">
+                        <div class="col-md-8">
                             <div class="order-search" style="margin: 10px 0px; position: relative;">
                                 <input type="text" class="form-control" placeholder="Nhập tên hoặc loại sản phẩm..." id="search-pro-box" autocomplete="off" name="txtInfo">
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
                             <select class="form-control" name="IdLoaiSP" id="IdLoaiSP">
-                                <option value="">Tìm theo loại</option>
-                                
-                                    <option value="1">11111</option>
-                               
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <select class="form-control" name="IsDelete" id="IsDelete">
-                                <option value="">Trạng thái</option>
-                                <option value="false">Đang kinh doanh</option>
-                                <option value="true">Tạm ngưng</option>
-
+                                @foreach (var item in Comon.loaisp())
+                                {
+                                    <option value="@item.Id">@item.Ten</option>
+                                }
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary" style="width: 8%;border: 1px solid grey;border-left: none;"><i class="fa fa-search"></i></button>
-                        <button type="button" class="btn btn-primary" onclick="openpoupmy(false);"><i class="fa fa-file-pdf-o" style="font-size:16px"></i> PDF</button>
-                        <button type="button" class="btn btn-primary" onclick="openpoupmy(true);"><i class="fa fa-file-excel-o" style="font-size:16px"></i> Excel</button>
                     </div>
                 }
                 @using (Html.BeginForm("Delete", "SanPhams", FormMethod.Post))
@@ -64,7 +55,7 @@
                                     <th scope="col">ID</th>
                                     <th scope="col">Tên sản phẩm</th>
                                     <th scope="col">Đơn giá</th>
-                                    <th scope="col">Ngày tạo</th>
+                                    <th scope="col">Loại SP</th>
                                     <th scope="col">Nội dung</th>
                                     <th scope="col">Ảnh mô tả</th>
                                     <th scope="col">Trạng thái</th>
@@ -73,28 +64,28 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
-                                        <th>
-                                            <a href="@Url.Action("Edit","SanPhams",new { @Id = item.Id })">
-                                                <button class="btn btn-primary" title="Chỉnh sửa" style="margin-left:-8px;margin-right:9px;" type="button"><i class="fas fa-pencil-alt"></i></button>
-                                            </a>
-                                            <button class="btn btn-warning" title="Ngừng kinh doanh" style="margin:-2px" name="IdDelete" type="submit" value="@item.Id" onclick="return ConfirmDelete()"> <i class="fas fa-trash-alt"></i></button>
-                                        </th>
-                                        <th scope="row"><a href="@Url.Action("Details","SanPhams",new { @Id = item.Id })">@item.Id</a></th>
-                                        <th>@item.Ten</th>
-                                        <th>@item.DonGia</th>
-                                        <th>@item.NgayTao</th>
-                                        <th>@item.NoiDung</th>
-                                        <th><img src="~/imageproducts/@item.AnhMoTa" style="width:60px; height:60px"></th>
-                                        @if (@item.IsDelete == false)
-                                        {
-                                            <th><span class="badge badge-primary">Đang kinh doanh</span></th>
-                                        }
-                                        else
-                                        {
-                                             <th><span class="badge badge-warning">Tạm ngưng</span></th>
-                                        }
-                                    </tr>
+                                <tr>
+                                    <th>
+                                        <a href="@Url.Action("Edit","SanPhams",new { @Id = item.Id })">
+                                            <button class="btn btn-primary" title="Chỉnh sửa" style="margin-left:-8px;margin-right:9px;" type="button"><i class="fas fa-pencil-alt"></i></button>
+                                        </a>
+                                        <button class="btn btn-warning" title="Ngừng kinh doanh" style="margin:-2px" name="IdDelete" type="submit" value="@item.Id" onclick="return ConfirmDelete()"> <i class="fas fa-trash-alt"></i></button>
+                                    </th>
+                                    <th scope="row"><a href="@Url.Action("Details","SanPhams",new { @Id = item.Id })">@item.Id</a></th>
+                                    <th>@item.Ten</th>
+                                    <th>@item.DonGia</th>
+                                    <th>@Comon.NameByIdLoaiSP(item.IdLoai)</th>
+                                    <th>@item.NoiDung</th>
+                                    <th><img src="~/imageproducts/@item.AnhMoTa" style="width:60px; height:60px"></th>
+                                    @if (@item.IsDelete == false)
+                                    {
+                                        <th><span class="badge badge-primary">Đang kinh doanh</span></th>
+                                    }
+                                    else
+                                    {
+                                        <th><span class="badge badge-warning">Tạm ngưng</span></th>
+                                    }
+                                </tr>
                                 }
                             </tbody>
                         </table>

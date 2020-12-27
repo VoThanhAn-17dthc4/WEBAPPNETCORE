@@ -9,6 +9,6 @@ namespace WebApp.Repository
 {
     public class SanPhamRepository : GenericRepository<SanPham>, ISanpham
     {
-
+       
     }
 }

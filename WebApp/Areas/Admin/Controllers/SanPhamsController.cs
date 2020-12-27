@@ -26,11 +26,15 @@ namespace WebApp.Areas.AdminX.Controllers
         private readonly ISize Size = new SizeRepository();
         private readonly ICTSanPham CTSanpham = new CTSanPhamRepository();
         private readonly IWebHostEnvironment webHostEnvironment;
+<<<<<<< HEAD
         public SanPhamsController(IWebHostEnvironment _webHostEnvironment)
         {
             webHostEnvironment = _webHostEnvironment;
         }  
         public async Task<IActionResult> Index()
+=======
+        public async Task<IActionResult> Index(string txtInfo, int? IdLoaiSP, string txtName, string txtTenLoai, bool? IsDelete)
+>>>>>>> a06e8bf6de45c568c49078b84a509c3303356837
         {
             IEnumerable<SanPhamViewModel> model = Sanpham.SelectAll().Select(
                      item => new SanPhamViewModel
@@ -41,8 +45,35 @@ namespace WebApp.Areas.AdminX.Controllers
                          AnhMoTa = item.AnhMoTa,
                          DonGia = item.DonGia,
                          NoiDung = item.NoiDung,
-                         IsDelete = item.IsDelete
+                         IsDelete = item.IsDelete,
+                         IdLoai = item.IdLoai
                      }).OrderByDescending(x => x.NgayTao).Where(x => x.IsDelete != true);
+            //if (IdLoaiSP != null)
+            //{
+            //    model = model.Where(x => x.IdLoai == IdLoaiSP).ToList();
+            //}
+            if (IsDelete != true)
+            {
+                model = model.Where(x => x.IsDelete == false).ToList();
+            }
+            else
+            {
+                model = model.Where(x => x.IsDelete == true).ToList();
+            }
+
+            if (txtName != null)
+            {
+                txtName = txtName == "" ? "~" : Comon.ChuyenThanhKhongDau(txtName);
+                model = model.Where(x => Comon.ChuyenThanhKhongDau(x.Ten).ToString().Contains(txtName.ToString())).ToList();
+            }
+            if (IdLoaiSP != null)
+            {
+                model = model.Where(x =>x.IdLoai == IdLoaiSP);
+            }
+            if (!string.IsNullOrEmpty(txtInfo))
+            {
+                model = model.Where(x => Comon.ChuyenThanhKhongDau(x.Ten).Contains(Comon.ChuyenThanhKhongDau(txtInfo)) /*|| Comon.ChuyenThanhKhongDau(x.TenLoai).Contains(txtInfo)*/).ToList();
+            }
             return View(model);
         }
 
@@ -58,6 +89,7 @@ namespace WebApp.Areas.AdminX.Controllers
             model.DonGia = item.DonGia;
             model.NoiDung = item.NoiDung;
             model.IsDelete = item.IsDelete;
+            model.IdLoai = item.IdLoai;
             var details = Size.SelectAll().Select(item => new SizeViewModel
             {
                 IdSp = item.IdSp,
@@ -72,7 +104,10 @@ namespace WebApp.Areas.AdminX.Controllers
         // GET: Admin/SanPhams/Create
         public IActionResult Create()
         {
+<<<<<<< HEAD
             //var user = _userManager.FindByNameAsync(User.Identity.Name);
+=======
+>>>>>>> a06e8bf6de45c568c49078b84a509c3303356837
             return View();
         }
 
@@ -93,6 +128,7 @@ namespace WebApp.Areas.AdminX.Controllers
                 _sp.NgayTao = DateTime.Now;
                 _sp.AnhMoTa = img;
                 _sp.DonGia = model.DonGia;
+                _sp.IdLoai = model.IdLoai;
                 Sanpham.Insert(_sp);
                 Sanpham.Save();
                 var idsp = _sp.Id;
@@ -142,6 +178,7 @@ namespace WebApp.Areas.AdminX.Controllers
             model.DonGia = item.DonGia;
             model.NoiDung = item.NoiDung;
             model.IsDelete = item.IsDelete;
+            model.IdLoai = item.IdLoai;
             var details = Size.SelectAll().Select(item => new SizeViewModel
             {
                 Id = item.Id,
@@ -172,6 +209,7 @@ namespace WebApp.Areas.AdminX.Controllers
                 _sp.Ten = model.Ten;
                 _sp.NoiDung = model.NoiDung;              
                 _sp.DonGia = model.DonGia;
+                _sp.IdLoai = model.IdLoai;
                 Sanpham.Update(_sp);
                 Sanpham.Save();
                 var idsp = _sp.Id;

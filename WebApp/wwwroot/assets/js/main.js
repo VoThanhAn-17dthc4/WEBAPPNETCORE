@@ -176,13 +176,16 @@ $( document ).on('ready', function(){
 		range: true,
 		min: 0,
 		max: 500,
-		values: [ 75, 300 ],
+		values: [ 10000, 10000000 ],
 		slide: function( event, ui ) {
-			$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+			$("#amount").val("" + ui.values[0] + " -" + ui.values[1]);
+			$("#gia1").val(ui.values[0]);
+			$("#gia2").val(ui.values[1]);
 		}
 	});
-	$( "#amount" ).val( "$" + range.slider( "values", 0 ) + " - $" + range.slider( "values", 1 ) );
-
+	$( "#amount" ).val( "" + range.slider( "values", 0 ) + " -" + range.slider( "values", 1 ) );
+	$("#gia1").val(range.slider("values", 0));
+	$("#gia2").val(range.slider("values", 1));
 
 	// **********************************************************************//
 	// ! 09. Thumbnail Slider

@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewData["Title"] = "DangNhap";
+    Layout = "~/Views/Shared/ACE_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="~/Login/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+<!-- Main css -->
+<link rel="stylesheet" href="~/Login/css/style.css">
+<style>
+    .container-content {
+        width: 1300px;
+        background: #fff;
+        margin: 0 auto;
+    }
+</style>
+<div class="main">
+    <section class="sign-in">
+        <div class="container-content">
+            <div class="signin-content">
+                <div class="signin-image">
+                    <figure><img src="https://image.freepik.com/free-vector/business-idea-concept-with-people_52683-28609.jpg" alt="sing up image"></figure>
+                    <a asp-controller="TaiKhoan" asp-action="DangKy" class="signup-image-link">Tạo tài khoản</a>
+                </div>
+
+                <div class="signin-form">
+                    <h2 class="form-title">Đăng nhập</h2>
+                    @using (Html.BeginForm("DangNhap", "TaiKhoan", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div class="form-group">
+                            <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" name="name" id="your_name" placeholder="Tài Khoản" />
+                        </div>
+                        <div class="form-group">
+                            <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                            <input type="password" name="pass" id="your_pass" placeholder="Mật khẩu" />
+                        </div>
+                        <div class="form-group form-button">
+                            <input type="submit" name="signin" id="signin" class="form-submit" value="Đăng nhập" />
+                        </div>
+                    }
+                    @*<div class="social-login">
+                            <span class="social-label">Or login with</span>
+                            <ul class="socials">
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-facebook"></i></a></li>
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-twitter"></i></a></li>
+                                <li><a href="#"><i class="display-flex-center zmdi zmdi-google"></i></a></li>
+                            </ul>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script src="~/Login/vendor/jquery/jquery.min.js"></script>
+<script src="~/Login/js/main.js"></script>
+<script>
+    $("#signin").click(function () {
+        var name = $("#your_name").val();
+        var email = $("#your_pass").val();
+        if (name == "") {
+            swal({
+                text: "Không dược bỏ trống!",
+                icon: "warning",
+                button: "Đồng ý",
+            });
+            return false;
+        }
+        if (email == "") {
+            swal({
+                text: "Không dược bỏ trống!",
+                icon: "warning",
+                button: "Đồng ý",
+            });
+            return false;
+        }
+    });
+</script>
+
+

@@ -16,7 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
-    <script src="~/assetadmin/scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/assetadmin/scripts/jquery-3.0.0.js"></script>
     @*<script src="~/assetadmin/public/templates/js/jquery.js"></script>*@
     <script src="~/assetadmin/public/templates/js/jquery-ui.min.js"></script>
     @*<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>*@
@@ -65,13 +65,13 @@
             <a class="sidebar-brand d-flex align-items-center justify-content-center"
                href="@Url.Action("Index", "Home", new { area ="Admin" })">
                 <div class="sidebar-brand-icon">
-                    <img src="~/assets/img/logo/logo.jpg">
+                    <img src="~/assetadmin/img/logo/logo.jpg">
                 </div>
                 <div class="sidebar-brand-text mx-3">MyCafe</div>
             </a>
             <hr class="sidebar-divider my-0">
             <li class="nav-item active">
-                <a class="nav-link" href="@Url.Action("Index", "Home", new { area ="Admin" })">
+                <a class="nav-link" href="@Url.Action("Index", "TrangChu", new { area ="Admin" })">
                     <i class="fas fa-chart-bar"></i>
                     <span>Tổng quan</span>
                 </a>
@@ -88,7 +88,8 @@
                         <a class="collapse-item" href="@Url.Action("Index", "DonHang", new { area ="Admin" })">Đơn hàng</a>
                         <a class="collapse-item" href="@Url.Action("Index", "SanPhams", new { area ="Admin" })">Sản phẩm</a>
                         <a class="collapse-item" href="@Url.Action("Index", "PhieuNhap", new { area ="Admin" })">Nhập hàng</a>
-                        <a class="collapse-item" href="@Url.Action("Index", "LoaiSP", new { area ="Admin" })">Loại & Đvt</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "LoaiSP", new { area ="Admin" })">Loại</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "TaiKhoan", new { area ="Admin" })">Nhân viên</a>
                     </div>
                 </div>
             </li>
@@ -101,10 +102,8 @@
                 <div id="collapseForm" class="collapse" aria-labelledby="headingForm" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">QUẢN LÝ ĐỐI TÁC</h6>
-                        <a class="collapse-item" href="@Url.Action("Index", "Customer", new { area ="Crm" })">Khách hàng</a>
-                        <a class="collapse-item" href="@Url.Action("Index", "Supplier", new { area ="Crm" })">Nhà cung cấp</a>
-                        @*<a class="collapse-item" href="modals.html">Nhóm khách hàng</a>
-                        <a class="collapse-item" href="popovers.html">Đơn vị vận chuyển</a>*@
+                        <a class="collapse-item" href="@Url.Action("Index", "KhachHang", new { area ="Admin" })">Khách hàng</a>
+                        <a class="collapse-item" href="@Url.Action("Index", "NhaCungCap", new { area ="Admin" })">Nhà cung cấp</a>
 
                     </div>
                 </div>
@@ -118,37 +117,12 @@
                 <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">BÁO CÁO</h6>
-                        <a class="collapse-item" href="@Url.Action("BaoCaoDoanhThuTheoNgay", "SaleReport", new { area ="Admin" })">Doanh số theo ngày</a>
-                        <a class="collapse-item" href="@Url.Action("BaoCaoDoanhThuTheoThang", "SaleReport", new { area ="Admin" })">Doanh số theo tháng</a>
-                        <a class="collapse-item" href="@Url.Action("BaoCaoTonKho", "SaleReport", new { area ="Admin" })"> Báo cáo tồn kho</a>
-                        <a class="collapse-item" href="@Url.Action("TopSanPhamBanChay", "SaleReport", new { area ="Admin" })">Sản phẩm bán chạy</a>
-                        <a class="collapse-item" href="@Url.Action("TopSanPhamKhongBanChay", "SaleReport", new { area ="Admin" })">Sản phẩm bán chậm</a>
-                        @*<a class="collapse-item" href="datatables.html">Lãi lỗ</a>*@
+                        <a class="collapse-item" href="@Url.Action("DoanhThuTheoThang", "SaleReport", new { area ="Admin" })">Doanh số theo tháng</a>
+                        <a class="collapse-item" href="@Url.Action("SPBanChay", "SaleReport", new { area ="Admin" })">Sản phẩm bán chạy</a>
+                        <a class="collapse-item" href="@Url.Action("SPBanCham", "SaleReport", new { area ="Admin" })">Sản phẩm bán chậm</a>
                     </div>
                 </div>
             </li>
-            <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Cài đặt
-            </div>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true"
-                   aria-controls="collapsePage">
-                    <i class="fa fa-gear"></i>
-                    <span>Thiết lập</span>
-                </a>
-                <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Thiết lập</h6>
-                        <a class="collapse-item" href="@Url.Action("Index", "Staff", new { area ="CMS_Staff" })">Nhân viên</a>
-                        <a class="collapse-item" href="@Url.Action("Index", "Setting", new { area ="Administration" })">Phân quyền</a>
-                        <a class="collapse-item" href="@Url.Action("Index", "UserType", new { area ="CMS_Staff" })">Loại nhân viên</a>
-                        <a class="collapse-item" href="@Url.Action("Create", "SettingPoint", new { area ="Administration" })">Thiết lập điểm</a>
-                        <a class="collapse-item" href="@Url.Action("Index", "Promotions", new { area ="Administration" })">Khuyến mãi</a>
-                    </div>
-                </div>
-            </li>
-            <hr class="sidebar-divider">
         </ul>
         <!-- Sidebar -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -160,17 +134,17 @@
                     </button>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown no-arrow mx-1">
-                            
+
                         </li>
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
-                                <img class="img-profile rounded-circle" src="/Assets/img/boy.png" style="max-width: 60px">
+                                <img class="img-profile rounded-circle" src="~/assetadmin/img/boy.png" style="max-width: 60px">
                                 <span class="ml-2 d-none d-lg-inline text-white small">Admin</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href='@Url.Action("LogOff", "User", new {area = "Administration" })'>
+                                <a class="dropdown-item" asp-action="LogOut" asp-controller="TaiKhoan">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Đăng xuất
                                 </a>
@@ -201,12 +175,13 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+
+
     <script src="~/assetadmin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/assetadmin/vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="~/assetadmin/js/ruang-admin.min.js"></script>
-    @*<script src="~/assetadmin/vendor/chart.js/Chart.min.js"></script>
-    <script src="~/assetadmin/js/demo/chart-area-demo.js"></script>
-    <script src="~/assetadmin/js/demo/chart-bar-demo.js"></script>*@
+    <script src="~/assetadmin/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/assetadmin/js/demo/chart-bar-demo.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     @RenderSection("Scripts", required: false)

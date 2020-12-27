@@ -1,4 +1,5 @@
 ﻿@model WebApp.Areas.Admin.Models.SanPhamViewModel
+@using WebApp.Helper;
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/ACE_Layout_Admin.cshtml";
@@ -56,7 +57,16 @@
                         </div>
                         <div class="form-group">
                             <label for="exampleFormControlSelect1">Nội dung</label>
-                            @Html.TextAreaFor(model=>model.NoiDung, new { @class = "form-control" })
+                            @Html.TextAreaFor(model => model.NoiDung, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>Loại Sản Phẩm</label>
+                            <select class="form-control" name="IdLoai" id="IdLoai">
+                                @foreach (var item in Comon.loaisp())
+                                {
+                                    <option value="@item.Id">@item.Ten</option>
+                                }
+                            </select>
                         </div>
                         <button class="btn btn-mini btn-primary" id="Save" type="submit" name="Submit">
                             <i class="ace-icon fa fa-save"></i> Lưu
@@ -89,10 +99,19 @@
 <script type="text/javascript">
     //validation
     $("#Save").click(function () {
+        var detailList = $('.detailList').find('tr').length;
+        if (detailList == 0) {
+            swal({
+                text: "Chưa nhập size và số lượng!",
+                icon: "warning",
+                button: "Đồng ý",
+            });
+            return false;
+        }
         var tensp = $("#Ten").val();
         var dongia = $("#DonGia").val();
         var loaisp = $("#IdLoai").find("option:selected").val();
-        var dvt = $("#IdDVT").find("option:selected").val();
+        var dvt = $("#NoiDung").val();
         if (tensp == "") {
             swal({
                 text: "Chưa nhập tên sản phẩm!",
@@ -119,7 +138,7 @@
         }
         if (dvt == "") {
             swal({
-                text: "Chưa chọn đơn vị tính!",
+                text: "Chưa nhập nội dung!",
                 icon: "warning",
                 button: "Đồng ý",
             });

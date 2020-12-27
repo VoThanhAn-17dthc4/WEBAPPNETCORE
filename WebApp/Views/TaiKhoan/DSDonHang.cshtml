@@ -1,0 +1,86 @@
+﻿@model IEnumerable<WebApp.Areas.Admin.Models.HoaDonViewModel>
+@using Microsoft.AspNetCore.Http;
+@{
+    ViewData["Title"] = "DSDonHang";
+    Layout = "~/Views/Shared/ACE_Layout.cshtml";
+    int i = 1;
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .donhang {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .table thead {
+        color: #fff;
+        background-color: #0f0e0f;
+    }
+    .table tbody {
+        background-color: #fdfffe;
+    }
+</style>
+@using (Html.BeginForm("Delete", "TaiKhoan",FormMethod.Get))
+{
+    <div class="donhang">
+        <table class="table table-bordered">
+            <caption style="padding-bottom:10px;">Danh sách đơn hàng của bạn</caption>
+            <thead class="thead-light">
+                <tr>
+                    <th>Hủy đơn</th>
+                    <th scope="col">STT</th>
+                    <th scope="col">Tổng tiền</th>
+                    <th scope="col">Ngày tạo</th>
+                    <th scope="col">Địa chỉ</th>
+                    <th scope="col">SDT</th>
+                    <th scope="col">Tình trạng đơn hàng</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <th>
+                            @if (@item.TrangThaiDonHang == "Chuaduyet")
+                            {
+                                <button class="btn btn-warning" title="Hủy đơn hàng" style="margin:-2px" name="IdDelete" type="submit" value="@item.Id" onclick="return ConfirmDelete()"> <i class="fa fa-trash-o"></i></button>
+                            }
+                        </th>
+                        <th>@i</th>
+                        <th>@item.TongTien</th>
+                        <th>@item.NgayTao</th>
+                        <td>@Context.Session.GetString("diachi")</td>
+                        <td>@Context.Session.GetString("sdt")</td>
+                        @if (@item.TrangThaiDonHang == "Chuaduyet")
+                        {
+                            <th><span class="badge badge-primary">Chưa duyệt đơn</span></th>
+                        }
+                        @if (@item.TrangThaiDonHang == "Danggiao")
+                        {
+                            <th><span class="badge badge-warning">Đang giao</span></th>
+                        }
+                        @if (@item.TrangThaiDonHang == "Hoanthanh")
+                        {
+                            <th><span class="badge badge-warning">Hoàn thành</span></th>
+                        }
+                        @if (@item.TrangThaiDonHang == "Huydon")
+                        {
+                            <th><span class="badge badge-warning">Hủy đơn</span></th>
+                        }
+                    </tr>
+                    i++;
+                }
+            </tbody>
+        </table>
+    </div>
+}
+<script type="text/javascript">
+    function ConfirmDelete() {
+        var x = confirm("Bạn có chắc muốn hủy đơn hàng đã chọn ?");
+        if (x)
+            return true;
+        else
+            return false;
+    }
+</script>

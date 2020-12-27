@@ -8,5 +8,6 @@ namespace WebApp.Interface
 {
     public interface ICTSanPham:IGenericRepository<CtsanPham>
     {
+        CtsanPham findbyidsp(int? id,int? size);
     }
 }

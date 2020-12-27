@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/ACE_Layout_Admin.cshtml";
+    int count = 1;
+}
+<style>
+    .chitiet:hover {
+        background-color: #337ab7;
+    }
+</style>
+<link href="~/assetadmin/css/home.css" rel="stylesheet" type="text/css" />
+<div class="container-fluid" id="container-wrapper">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Tổng quan</h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="./">Trang chủ</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Tổng quan</li>
+        </ol>
+    </div>
+    <div class="row">
+        <!--Grid-->
+        <div class="column">
+            <div class="card" style="background-color:#8bc34a">
+                <h3>Tổng thu<i class="fas fa-chart-bar" style="font-size:24px; float:right "></i></h3>
+                <p class="money1">@ViewBag.tongthu</p>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card" style="background-color:#0277bd">
+                <h3>Tổng chi <i class="far fa-fw fa-window-maximize" style="font-size: 24px; float:right"></i></h3>
+                <p class="money1">@ViewBag.tongchi</p>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card" style="background-color:#ffc107">
+                <h3>Số đơn hàng <i class="far fa-calendar-alt" style="font-size:24px;float:right"></i></h3>
+                <p>@ViewBag.tongdonhang</p>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="card" style="background-color:#d32f2f">
+                <h3>Kho <i class="fas fa-warehouse" style="font-size: 24px; float: right"></i></h3>
+                <p>@ViewBag.tonghang</p>
+            </div>
+        </div>
+        <!-- Doanh số-->
+        <div class="col-lg-12" style="top:25px">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">DOANH SỐ</h6>
+                </div>
+                <div class="card-body">
+                    <div class="chart-bar">
+                        <canvas id="myBarChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="col-lg-4" style="top:13px;padding:12px">
+            <div class="card shadow mb-10">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">TIỀN BẠC</h6>
+                </div>
+                <div style="text-align:right;margin-top:-43px">
+                    <button class="btn btn-default" type="button" id="dropdownMenuButton"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Hôm nay
+                    </button>
+                </div>
+                <div class="card-body">
+                    <a href="#demo1" data-toggle="collapse">Tổng thu:<b class="money1" style="float:right">@ViewBag.tongthuhn</b></a>
+
+                    <hr class="sidebar-divider">
+                    <a href="#demo2" data-toggle="collapse" style="color:red">Tổng chi:<b class="money1" style="float:right">@ViewBag.tongchihn</b></a>
+
+                    <hr class="sidebar-divider">
+                    <p style="color:black"><i>(Thu - Chi):</i><b class="money1" style="float:right">@ViewBag.thuchi</b></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4" style="top:13px;padding:12px">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">TÌNH TRẠNG KHO</h6>
+                </div>
+                <div class="card-body">
+                    <p style="color:black">Hàng còn trong kho: <b style="float:right">@ViewBag.countHangCon</b></p>
+                    <p style="color:black">Sắp hết hàng: <b style="float:right">@ViewBag.countSapHetHang</b></p>
+                    <p style="color:black">Hết hàng: <b style="float: right; color:#d32f2f">@ViewBag.countHetHang</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

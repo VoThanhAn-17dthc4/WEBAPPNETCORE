@@ -12,5 +12,6 @@ namespace WebApp.Areas.Admin.Models
         public int? SizeNumber { get; set; }
         public int? SoLuongKho { get; set; }
         public bool? IsDelete { get; set; }
+        public object IdNcc { get; internal set; }
     }
 }

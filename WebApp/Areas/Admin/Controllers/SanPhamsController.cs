@@ -26,6 +26,10 @@ namespace WebApp.Areas.AdminX.Controllers
         private readonly ISize Size = new SizeRepository();
         private readonly ICTSanPham CTSanpham = new CTSanPhamRepository();
         private readonly IWebHostEnvironment webHostEnvironment;
+        public SanPhamsController(IWebHostEnvironment _webHostEnvironment)
+        {
+            webHostEnvironment = _webHostEnvironment;
+        }  
         public async Task<IActionResult> Index()
         {
             IEnumerable<SanPhamViewModel> model = Sanpham.SelectAll().Select(
@@ -68,7 +72,7 @@ namespace WebApp.Areas.AdminX.Controllers
         // GET: Admin/SanPhams/Create
         public IActionResult Create()
         {
-            var user = _userManager.FindByNameAsync(User.Identity.Name);
+            //var user = _userManager.FindByNameAsync(User.Identity.Name);
             return View();
         }
 
@@ -102,6 +106,7 @@ namespace WebApp.Areas.AdminX.Controllers
                     Size.Insert(_size);
                     Size.Save();
                 }
+                return RedirectToAction("Index", "SanPhams");
             }
             catch (Exception e)
             {
@@ -182,6 +187,7 @@ namespace WebApp.Areas.AdminX.Controllers
                         xsize.IsDelete = false;
                         Size.Insert(xsize);
                         Size.Save();
+                        return RedirectToAction("Index","SanPhams");
                     }
                     else
                     {
@@ -190,6 +196,7 @@ namespace WebApp.Areas.AdminX.Controllers
                         _size.SoLuongKho = item.SoLuongKho;
                         Size.Update(_size);
                         Size.Save();
+                        return RedirectToAction("Index", "SanPhams");
                     }    
                    
                 }

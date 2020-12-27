@@ -37,7 +37,7 @@ namespace WebApp.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=ADMIN\\SQLEXPRESS;Database=WebAppBanHang;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-784C590;Database=WebAppBanHang;Trusted_Connection=True;");
             }
         }
 
